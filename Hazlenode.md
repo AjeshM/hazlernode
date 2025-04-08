@@ -1,0 +1,83 @@
+This will an installble Frappe App similar to n8n
+
+Once you install it, the user should be able to automate stuff!!!
+
+Move out of server-script and webhooks 
+
+## Use Cases
+* Send a telegram message on creation of a doc.
+* Send a HTTP request to GitHub
+* Recieve a webhook from Stripe and create a payment entry to doc and then send a message on Raven
+* Send a Raven message
+* Send salary slip to Raven channel
+
+## Scope
+
+Views:
+* Track Workflow runs
+* List of Workflows
+
+Nodes:
+
+[TRIGGER]
+* Document Event
+* Scheduler Event / CRON
+* Webhook
+
+[ACTIONS]
+* HTTP Request
+* Send Email
+* CRUD Documents
+* Telegram
+
+## 3rd Party Nodes
+
+---
+Defined in Hooks.py
+---
+
+* Send a Raven Message
+* Send salary slip to Raven channel
+
+```Python
+extend_hazelnodes = {
+  "Raven":"raven_app.extends.nodes.Raven"
+}
+```
+## Resources
+https://reactflow.dev/learn
+
+https://ui.shadcn.com/docs/components/sonner
+
+https://catalyst.tailwindui.com/docs/badge
+
+https://github.com/pmndrs/zustand
+
+https://redux-toolkit.js.org
+
+✅ Frappe Framework
+
+✅ React
+
+✅ TypeScript
+
+## Good Practices
+* UI/UX Polished
+* Write tests! (Unit tests and Integration tests)
+* Use TS properly (Any!)
+* Use a state management solution 
+* Keep a deploy instance on FC
+* CI / Linting Setup
+
+## Side Stuff
+* Have a documentation going
+* Readme and stuff
+* Issue Tracking
+* Channel cord discord
+
+## Later Point [Advanced]
+* Script Nodes (Python/JS)
+* Flow Nodes (IF/ELSE, LOOP/Batch etc..)
+* Trigger one workflow from another
+
+
