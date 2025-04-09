@@ -84,10 +84,18 @@ https://redux-toolkit.js.org
 
 ## DocTypes
 1. Hazler Workflow
-    * Nodes (related to nodes)
+    * Nodes (related to nodes) (Child Table)
+    * Connections (basically edges)(Object)
     * Enabled?
-2. Hazler Node
+2. Hazler Node Type
     * Name
+3. Hazler Node
+    * ID
+    * Type (`input`,`output`)
+    * Hazle Node Type (Hazle Node Type)
+    * Position X
+    * Position Y
+    * 
 3. Hazler Workflow Execution
     * Status
     * Execution Time
