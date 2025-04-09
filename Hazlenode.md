@@ -68,6 +68,8 @@ https://redux-toolkit.js.org
 * Use a state management solution 
 * Keep a deploy instance on FC
 * CI / Linting Setup
+  * Ruff Setup (Py)
+  * Prettier (JS)
 
 ## Side Stuff
 * Have a documentation going
@@ -80,4 +82,17 @@ https://redux-toolkit.js.org
 * Flow Nodes (IF/ELSE, LOOP/Batch etc..)
 * Trigger one workflow from another
 
+## DocTypes
+1. Hazler Workflow
+    * Nodes (related to nodes)
+    * Enabled?
+2. Hazler Node
+    * Name
+3. Hazler Workflow Execution
+    * Status
+    * Execution Time
+    * Hazler Workflow( copy of it actually)
+4. Hazler Variable
+    * Accessible across all workflow
+    * 
 
