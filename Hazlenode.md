@@ -104,3 +104,19 @@ https://redux-toolkit.js.org
     * Accessible across all workflow
     * 
 
+## E28
+* Zapier Review
+* Get Auth Working, Redirect to Frappe's Login
+* React Query + some kind of basic state management for user
+* A template?
+
+#### Checking login
+```javascript
+export function sessionUser() {
+  const cookies = new URLSearchParams(document.cookie.split('; ').join('&'))
+  let _sessionUser = cookies.get('user_id')
+  if (_sessionUser === 'Guest') {
+    _sessionUser = null
+  }
+  return _sessionUser
+}
