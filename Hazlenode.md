@@ -120,3 +120,8 @@ export function sessionUser() {
   }
   return _sessionUser
 }
+```
+## Usefull Command
+```
+* cur_frm.doc
+* 
