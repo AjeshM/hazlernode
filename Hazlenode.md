@@ -51,6 +51,8 @@ https://ui.shadcn.com/docs/components/sonner
 
 https://catalyst.tailwindui.com/docs/badge
 
+https://github.com/st4l1nR/catalyist-ui-kit  ( Catalyst UI free download)
+
 https://github.com/pmndrs/zustand
 
 https://redux-toolkit.js.org

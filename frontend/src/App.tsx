@@ -1,32 +1,36 @@
-import React, { useCallback } from 'react';
-import {
-	ReactFlow,
-	MiniMap,
-	Controls,
-	Background,
-	useNodesState,
-	useEdgesState,
-	addEdge,
-} from '@xyflow/react';
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
-import { Button } from "@/components/ui/button"
-import '@xyflow/react/dist/style.css';
+import React from 'react';
+// import {
+// 	ReactFlow,
+// 	MiniMap,
+// 	Controls,
+// 	Background,
+// 	useNodesState,
+// 	useEdgesState,
+// 	addEdge,
+// } from '@xyflow/react';
 
-const initialNodes = [
-	{ id: '1', position: { x: 0, y: 0 }, data: { label: '1' } },
-	{ id: '2', position: { x: 0, y: 100 }, data: { label: '2' } },
-];
-const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
+import { toast } from 'sonner';
+
+import {
+  Dialog,
+  DialogActions,
+  DialogBody,
+  DialogDescription,
+  DialogTitle,
+} from '@/components/ui/dialog';
+
+// import { Button } from "@/components/ui/button"
+// import '@xyflow/react/dist/style.css';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Checkbox } from '@/components/ui/checkbox';
+// import { Text } from "./components/ui/text";
+
+// const initialNodes = [
+// 	{ id: '1', position: { x: 0, y: 0 }, data: { label: '1' } },
+// 	{ id: '2', position: { x: 0, y: 100 }, data: { label: '2' } },
+// ];
+// const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
 
 // export default function App() {
 //   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
@@ -53,32 +57,55 @@ const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
 //     </div>
 //   );
 // }
+
 export default function App() {
-	return (
-		<div className="flex flex-col items-center justify-center min-h-svh">
-			<h1 className='text-red-500 font-bold'>Hello Hazler Node</h1>
+  const [isOpen, setIsOpen] = React.useState(false);
 
-			<AlertDialog>
-      <AlertDialogTrigger asChild>
-        <Button variant="outline">Show Dialog</Button>
-      </AlertDialogTrigger>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-          <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Continue</AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
-		</div>
+  return (
+    <>
+      <div className="flex gap-4 items-center">
+        <Button
+          color="white"
+          onClick={() =>
+            toast('Workflow run successful', {
+              description: 'Sunday, December 03, 2023 at 9:00 AM',
+              action: {
+                label: 'Details',
+                onClick: () => console.log('Undo'),
+              },
+            })
+          }
+        >
+          Show toast
+        </Button>
+        <Button color="lime" type="button" onClick={() => setIsOpen(true)}>
+          Show Dialog
+        </Button>
 
+        <Checkbox color="lime" />
+      </div>
+      <Dialog open={isOpen} onClose={setIsOpen}>
+        <DialogTitle>Refund payment</DialogTitle>
+        <DialogDescription>
+          The refund will be reflected in the customer’s bank account 2 to 3
+          business days after processing.
+        </DialogDescription>
+        <DialogBody></DialogBody>
+        <DialogActions>
+          <Button plain onClick={() => setIsOpen(false)}>
+            Cancel
+          </Button>
+          <Button color="lime" onClick={() => setIsOpen(false)}>
+            Refund
+          </Button>
+        </DialogActions>
+      </Dialog>
 
-
-	)
+      <div className="mt-5 flex gap-3">
+        <Badge color="lime">documentation</Badge>
+        <Badge color="purple">help wanted</Badge>
+        <Badge color="rose">bug</Badge>
+      </div>
+    </>
+  );
 }
