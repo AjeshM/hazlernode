@@ -45,6 +45,8 @@ extend_hazelnodes = {
 }
 ```
 ## Resources
+https://github.com/The-Commit-Company/frappe-types (Generate Frappe Types for the apps)
+
 https://reactflow.dev/learn
 
 https://ui.shadcn.com/docs/components/sonner
@@ -98,10 +100,11 @@ https://redux-toolkit.js.org
     * ✅ Position X
     * ✅ Position Y
     * 
-3. Hazler Workflow Execution
-    * Status
+3. ✅ Hazler Workflow Execution
+    * ✅ Status
     * Execution Time
-    * Hazler Workflow( copy of it actually)
+    * ✅ Hazler Workflow
+    * 🟨 Copy of the Hazler Workflow at the time of execution
 4. Hazler Variable
     * Accessible across all workflow
     * 
@@ -111,6 +114,20 @@ https://redux-toolkit.js.org
 * Get Auth Working, Redirect to Frappe's Login
 * React Query + some kind of basic state management for user
 * A template?
+
+## E29
+* Base DocTypes
+* user flow / lo-fi wireframes
+
+---
+### BTS
+* Something analogous to createListResource, createDocumentResource
+* Status of Frappe API 2
+---
+
+## E30
+* List of workflows
+* Individual workflow
 
 #### Checking login
 ```javascript

@@ -26,7 +26,8 @@ const router = createRouter({
     queryClient,
     sessionUser: getSessionUserId()
   },
-  defaultErrorComponent: () => <p>Something went wrong (from default error component)</p>
+  defaultErrorComponent: () =>
+    <p>Something went wrong (from default error component)</p>
 
 })
 
