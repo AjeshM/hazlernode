@@ -16,21 +16,9 @@ import { Route as rootRoute } from './routes/__root'
 
 // Create Virtual Routes
 
-const AboutComponentImport = createFileRoute('/about')()
 const IndexComponentImport = createFileRoute('/')()
 
 // Create/Update Routes
-
-const AboutComponentRoute = AboutComponentImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRoute,
-} as any).update({
-  component: lazyRouteComponent(
-    () => import('./routes/about.component'),
-    'component',
-  ),
-})
 
 const IndexComponentRoute = IndexComponentImport.update({
   id: '/',
@@ -54,13 +42,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexComponentImport
       parentRoute: typeof rootRoute
     }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutComponentImport
-      parentRoute: typeof rootRoute
-    }
   }
 }
 
@@ -68,37 +49,32 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexComponentRoute
-  '/about': typeof AboutComponentRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexComponentRoute
-  '/about': typeof AboutComponentRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexComponentRoute
-  '/about': typeof AboutComponentRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about'
+  fullPaths: '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about'
-  id: '__root__' | '/' | '/about'
+  to: '/'
+  id: '__root__' | '/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexComponentRoute: typeof IndexComponentRoute
-  AboutComponentRoute: typeof AboutComponentRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexComponentRoute: IndexComponentRoute,
-  AboutComponentRoute: AboutComponentRoute,
 }
 
 export const routeTree = rootRoute
@@ -111,15 +87,11 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
-        "/about"
+        "/"
       ]
     },
     "/": {
       "filePath": "index.component.tsx"
-    },
-    "/about": {
-      "filePath": "about.component.tsx"
     }
   }
 }
