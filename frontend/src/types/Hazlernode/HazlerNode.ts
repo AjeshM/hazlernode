@@ -1,5 +1,5 @@
 
-export interface HazlerNode{
+export interface HazlerNode {
 	name: number
 	creation: string
 	modified: string

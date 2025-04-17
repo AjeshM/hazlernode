@@ -14,7 +14,7 @@ export interface HazlerWorkflowExecutionLog{
 	workflow: string
 	/**	Workflow Title : Data	*/
 	workflow_title?: string
-	/**	Amended From : Link - Hazler Workflow Execution	*/
+	/**	Amended From : Link - Hazler Workflow Execution Log	*/
 	amended_from?: string
 	/**	Status : Select	*/
 	status?: "Success" | "Failed" | "Running"

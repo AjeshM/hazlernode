@@ -22,7 +22,7 @@
    "fieldtype": "Link",
    "label": "Amended From",
    "no_copy": 1,
-   "options": "Hazler Workflow Execution",
+   "options": "Hazler Workflow Execution Log",
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
@@ -58,7 +58,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-04-17 20:07:13.862165",
+ "modified": "2025-04-18 00:46:18.835770",
  "modified_by": "Administrator",
  "module": "Hazlernode",
  "name": "Hazler Workflow Execution Log",

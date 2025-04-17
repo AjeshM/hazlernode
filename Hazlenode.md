@@ -100,7 +100,7 @@ https://redux-toolkit.js.org
     * ✅ Position X
     * ✅ Position Y
     * 
-3. ✅ Hazler Workflow Execution
+3. ✅ Hazler Workflow Execution Log
     * ✅ Status
     * Execution Time
     * ✅ Hazler Workflow
