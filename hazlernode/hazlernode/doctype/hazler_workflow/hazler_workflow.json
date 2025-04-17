@@ -6,7 +6,9 @@
  "engine": "InnoDB",
  "field_order": [
   "enabled",
-  "title"
+  "title",
+  "section_break_zvtn",
+  "nodes"
  ],
  "fields": [
   {
@@ -21,12 +23,27 @@
    "in_list_view": 1,
    "label": "Title",
    "reqd": 1
+  },
+  {
+   "fieldname": "section_break_zvtn",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "nodes",
+   "fieldtype": "Table",
+   "label": "Nodes",
+   "options": "Hazler Node"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2025-04-17 16:08:07.540732",
+ "links": [
+  {
+   "link_doctype": "Hazler Workflow Execution",
+   "link_fieldname": "workflow"
+  }
+ ],
+ "modified": "2025-04-17 20:11:13.058758",
  "modified_by": "Administrator",
  "module": "Hazlernode",
  "name": "Hazler Workflow",
@@ -46,6 +63,7 @@
    "write": 1
   }
  ],
+ "show_title_field_in_link": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
