@@ -15,9 +15,20 @@ import {
 
 // Import the generated route tree
 import { routeTree } from './routeTree.gen'
+import { getSessionUserId } from './data/session';
 
 // Create a new router instance
-const router = createRouter({ routeTree })
+const router = createRouter({
+  basepath: 'hazlernode',
+  routeTree,
+  defaultPreloadStaleTime: 0,
+  context: {
+    queryClient,
+    sessionUser: getSessionUserId()
+  },
+  defaultErrorComponent: () => <p>Something went wrong (from default error component)</p>
+
+})
 
 // Register the router instance for type safety
 declare module '@tanstack/react-router' {
