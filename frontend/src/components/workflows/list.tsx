@@ -1,4 +1,3 @@
-import { useDocType } from '@/queries/frappe';
 import {
   Table,
   TableBody,
@@ -11,11 +10,10 @@ import { Switch } from '@/components/ui/switch';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useDocumentList } from '@/queries/frappe';
 
 export const WorkflowList = () => {
-  const { useList } = useDocType<HazlerWorkflow>('Hazler Workflow');
-
-  const workflowsList = useList({
+  const workflowsList = useDocumentList<HazlerWorkflow>('Hazler Workflow', {
     fields: ['name', 'title', 'enabled'],
   });
 
