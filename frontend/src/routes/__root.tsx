@@ -31,12 +31,12 @@ function RootComponent() {
   return (
     <React.Fragment>
       <div className="p-2 flex gap-2">
-        <Link to="/" className="[&.active]:font-bold">
-          Dashboard
+        <Link to="/" className="[&.active]:font-bold text-gray-800">
+          Hazler✨Node
         </Link>
       </div>
       <hr />
-      <div className='p-2'>
+      <div className="py-2">
         <Outlet />
       </div>
       <Toaster />
