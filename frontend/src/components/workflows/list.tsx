@@ -10,13 +10,63 @@ import { Switch } from '@/components/ui/switch';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useDocumentList } from '@/queries/frappe';
+import { useDocType, useDocumentList } from '@/queries/frappe';
+import { useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
 
 export const WorkflowList = () => {
-  const workflowsList = useDocumentList<HazlerWorkflow>('Hazler Workflow', {
-    fields: ['name', 'title', 'enabled'],
+  const { useList, useSetValueMutation, getListOptions } =
+    useDocType<HazlerWorkflow>('Hazler Workflow');
+
+  const queryClient = useQueryClient();
+
+  const workflowsList = useList({
+    fields: ['title', 'name', 'enabled'],
   });
 
+  const queryOptions = getListOptions({
+    fields: ['title', 'name', 'enabled'],
+  });
+  const workflowSetValueMutation = useSetValueMutation();
+
+  function toggleEnabled(wf: HazlerWorkflow) {
+    const currentWorkflows = queryClient.getQueryData(queryOptions.queryKey);
+
+    if (!currentWorkflows) {
+      return;
+    }
+
+    const updatedWorkflows = [];
+    for (const workflow of currentWorkflows) {
+      const newWorkflow = { ...workflow };
+      if (workflow.name === wf.name) {
+        newWorkflow.enabled = wf.enabled ? 0 : 1;
+      }
+      updatedWorkflows.push(newWorkflow);
+    }
+    queryClient.setQueryData(queryOptions.queryKey, updatedWorkflows);
+
+    workflowSetValueMutation.mutate(
+      {
+        name: wf.name,
+        values: {
+          enabled: wf.enabled ? 0 : 1,
+        },
+      },
+      {
+        onSuccess: () => {
+          toast.success(
+            `Workflow ${wf.enabled ? 'disabled' : 'enabled'} successfully!`,
+          );
+        },
+        onSettled: () => {
+          queryClient.invalidateQueries({
+            queryKey: queryOptions.queryKey,
+          });
+        },
+      },
+    );
+  }
   if (workflowsList.isLoading) {
     return (
       <>
@@ -54,7 +104,11 @@ export const WorkflowList = () => {
                 <TableRow key={wf.name} href={'#'}>
                   <TableCell className="font-medium">{wf.title}</TableCell>
                   <TableCell align="right">
-                    <Switch color="lime" checked={!!wf.enabled} />
+                    <Switch
+                      color="lime"
+                      onChange={() => toggleEnabled(wf)}
+                      checked={!!wf.enabled}
+                    />
                   </TableCell>
                 </TableRow>
               ))}

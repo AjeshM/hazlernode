@@ -33,6 +33,8 @@ export function useDocType<DT>(doctype: DocTypeName) {
   return {
     useList: (params: DocTypeQueryParams<DT> = {}) =>
       useQuery(getListQueryOptions<DT>(doctype, params)),
+    getListOptions: (params: DocTypeQueryParams<DT> = {}) =>
+      getListQueryOptions<DT>(doctype, params),
     useDoc: (name: string) => useQuery(getDocQueryOptions<DT>(doctype, name)),
     useSetValueMutation: () => useSetValueMutation<DT>(doctype),
   };
@@ -85,7 +87,7 @@ type Optional<Type> = {
 };
 
 interface SetValueData<DT> {
-  name: string;
+  name: string | number;
   values: Optional<DT>;
 }
 
