@@ -1,3 +1,4 @@
+import { useDocType } from "@/queries/frappe";
 import { createFileRoute } from "@tanstack/react-router";
 
 
@@ -8,12 +9,14 @@ export const Route = createFileRoute('/workflow/$id')({
   component: WorkflowDetails,
 })
 function WorkflowDetails() {
-  const id = Route.useParams().id
+  const params = Route.useParams();
+  const { useSuspenseDoc } = useDocType<HazlerWorkflow>('Hazler Workflow');
+  const workflowDoc = useSuspenseDoc(params.id);
   return (
     <>
-      <pre>
-        Workflow details {id}
-      </pre>
+      <div>
+        <pre>{JSON.stringify(workflowDoc.data, null, 2)}</pre>
+      </div>
     </>
   );
 };
