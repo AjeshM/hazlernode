@@ -113,17 +113,17 @@ export const WorkflowList = () => {
     <>
       <Card>
         <CardHeader>
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center align-baseline">
             <CardTitle>Your Workflows</CardTitle>
             <Button color="lime" onClick={() => setShowNewWorkflowDialog(true)}>New Workflow</Button>
           </div>
         </CardHeader>
         <CardContent>
-          <Table className="[--gutter:theme(spacing.6)] sm:[--gutter:theme(spacing.8)]">
+          <Table dense className="[--gutter:theme(spacing.4)] sm:[--gutter:theme(spacing.2)]">
             <TableHead>
               <TableRow>
                 <TableHeader>Name</TableHeader>
-                <TableHeader align="right">Enabled?</TableHeader>
+                <TableHeader align="right">On/Off</TableHeader>
               </TableRow>
             </TableHead>
             <TableBody>
