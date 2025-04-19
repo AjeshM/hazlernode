@@ -128,7 +128,7 @@ export const WorkflowList = () => {
             </TableHead>
             <TableBody>
               {workflows?.map((wf) => (
-                <TableRow key={wf.name} href='/workflow/$id' params={{
+                <TableRow key={wf.name} to='/workflow/$id' params={{
                   id: String(wf.name),
                 }}>
                   <TableCell className="font-medium">

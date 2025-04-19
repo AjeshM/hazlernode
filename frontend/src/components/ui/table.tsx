@@ -44,18 +44,18 @@ export function TableBody(props: React.ComponentPropsWithoutRef<'tbody'>) {
 }
 
 const TableRowContext = createContext<{
-  href?: LinkProps['to'];
+  to?: LinkProps['to'];
   target?: string; title?: string;
   params: LinkProps['params'];
 }>({
-  href: undefined,
+  to: undefined,
   target: undefined,
   title: undefined,
   params: {},
 })
 
 export function TableRow({
-  href,
+  to,
   target,
   title,
   params,
@@ -63,23 +63,23 @@ export function TableRow({
   children,
   ...props
 }: {
-  href?: LinkProps['to'];
+  to?: LinkProps['to'];
   params?: LinkProps['params'];
   target?: string; title?: string
 } & React.ComponentPropsWithoutRef<'tr'>) {
   let { striped } = useContext(TableContext)
 
   return (
-    <TableRowContext.Provider value={{ href, target, title, params } as React.ContextType<typeof TableRowContext>}>
+    <TableRowContext.Provider value={{ to, target, title, params } as React.ContextType<typeof TableRowContext>}>
       <tr
         {...props}
         className={clsx(
           className,
-          href &&
+          to &&
           'has-[[data-row-link][data-focus]]:outline has-[[data-row-link][data-focus]]:outline-2 has-[[data-row-link][data-focus]]:-outline-offset-2 has-[[data-row-link][data-focus]]:outline-blue-500 dark:focus-within:bg-white/[2.5%]',
           striped && 'even:bg-zinc-950/[2.5%] dark:even:bg-white/[2.5%]',
-          href && striped && 'hover:bg-zinc-950/5 dark:hover:bg-white/5',
-          href && !striped && 'hover:bg-zinc-950/[2.5%] dark:hover:bg-white/[2.5%]'
+          to && striped && 'hover:bg-zinc-950/5 dark:hover:bg-white/5',
+          to && !striped && 'hover:bg-zinc-950/[2.5%] dark:hover:bg-white/[2.5%]'
         )}
       >
         {children}
@@ -106,12 +106,12 @@ export function TableHeader({ className, ...props }: React.ComponentPropsWithout
 
 export function TableCell({ className, children, ...props }: React.ComponentPropsWithoutRef<'td'>) {
   let { bleed, dense, grid, striped } = useContext(TableContext)
-  let { href, target, title, params } = useContext(TableRowContext)
+  let { to, target, title, params } = useContext(TableRowContext)
   let [cellRef, setCellRef] = useState<HTMLElement | null>(null)
 
   return (
     <td
-      ref={href ? setCellRef : undefined}
+      ref={to ? setCellRef : undefined}
       {...props}
       className={clsx(
         className,
@@ -122,10 +122,10 @@ export function TableCell({ className, children, ...props }: React.ComponentProp
         !bleed && 'sm:first:pl-2 sm:last:pr-2'
       )}
     >
-      {href && (
+      {to && (
         <Link
           data-row-link
-          href={href}
+          to={to}
           params={params}
           target={target}
           aria-label={title}
