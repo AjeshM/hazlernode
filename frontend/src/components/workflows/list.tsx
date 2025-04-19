@@ -18,10 +18,10 @@ import CreateWorkflowDialog from '@/components/workflows/create-dialog';
 
 export const WorkflowList = () => {
   const [showNewWorkflowDialog, setShowNewWorkflowDialog] = useState<boolean>(false);
+  const queryClient = useQueryClient();
   const { useList, useSetValueMutation, getListOptions } =
     useDocType<HazlerWorkflow>('Hazler Workflow');
 
-  const queryClient = useQueryClient();
   const listOptions: DocTypeQueryParams<HazlerWorkflow> = {
     fields: ['title', 'name', 'enabled'],
     order_by: 'creation desc'
