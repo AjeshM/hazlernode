@@ -129,6 +129,12 @@ https://redux-toolkit.js.org
 * List of workflows
 * Individual workflow
 
+## E31
+* Enable / Disable workflow
+* Create new workflow
+* Workflow route
+* 
+
 #### Checking login
 ```javascript
 export function sessionUser() {

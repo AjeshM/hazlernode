@@ -128,8 +128,12 @@ export const WorkflowList = () => {
             </TableHead>
             <TableBody>
               {workflows?.map((wf) => (
-                <TableRow key={wf.name} href={'#'}>
-                  <TableCell className="font-medium">{wf.title}</TableCell>
+                <TableRow key={wf.name} href='/workflow/$id' params={{
+                  id: String(wf.name),
+                }}>
+                  <TableCell className="font-medium">
+                    {wf.title}
+                  </TableCell>
                   <TableCell align="right">
                     <Switch
                       color="lime"

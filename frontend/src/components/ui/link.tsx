@@ -8,14 +8,15 @@ https://catalyst.tailwindui.com/docs#client-side-router-integration
 
 import { DataInteractive as HeadlessDataInteractive } from '@headlessui/react'
 import React from 'react'
+import { Link as TanstackLink, type LinkProps } from '@tanstack/react-router';
 
 export const Link = React.forwardRef(function Link(
-  props: { href: string } & React.ComponentPropsWithoutRef<'a'>,
+  props: { href: LinkProps['to'] } & Omit<LinkProps, 'to'>,
   ref: React.ForwardedRef<HTMLAnchorElement>
 ) {
   return (
     <HeadlessDataInteractive>
-      <a {...props} ref={ref} />
+      <TanstackLink {...props} ref={ref} to={props.href} params={props.params} />
     </HeadlessDataInteractive>
   )
 })

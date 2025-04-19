@@ -13,6 +13,7 @@ import { createFileRoute, lazyRouteComponent } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as WorkflowIdImport } from './routes/workflow.$id'
 
 // Create Virtual Routes
 
@@ -31,6 +32,12 @@ const IndexComponentRoute = IndexComponentImport.update({
   ),
 })
 
+const WorkflowIdRoute = WorkflowIdImport.update({
+  id: '/workflow/$id',
+  path: '/workflow/$id',
+  getParentRoute: () => rootRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -42,6 +49,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexComponentImport
       parentRoute: typeof rootRoute
     }
+    '/workflow/$id': {
+      id: '/workflow/$id'
+      path: '/workflow/$id'
+      fullPath: '/workflow/$id'
+      preLoaderRoute: typeof WorkflowIdImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -49,32 +63,37 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexComponentRoute
+  '/workflow/$id': typeof WorkflowIdRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexComponentRoute
+  '/workflow/$id': typeof WorkflowIdRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexComponentRoute
+  '/workflow/$id': typeof WorkflowIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/workflow/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/workflow/$id'
+  id: '__root__' | '/' | '/workflow/$id'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexComponentRoute: typeof IndexComponentRoute
+  WorkflowIdRoute: typeof WorkflowIdRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexComponentRoute: IndexComponentRoute,
+  WorkflowIdRoute: WorkflowIdRoute,
 }
 
 export const routeTree = rootRoute
@@ -87,11 +106,15 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/"
+        "/",
+        "/workflow/$id"
       ]
     },
     "/": {
       "filePath": "index.component.tsx"
+    },
+    "/workflow/$id": {
+      "filePath": "workflow.$id.tsx"
     }
   }
 }

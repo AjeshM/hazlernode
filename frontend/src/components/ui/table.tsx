@@ -4,6 +4,7 @@ import { clsx } from 'clsx'
 import type React from 'react'
 import { createContext, useContext, useState } from 'react'
 import { Link } from './link'
+import { type LinkProps } from '@tanstack/react-router';
 
 const TableContext = createContext<{ bleed: boolean; dense: boolean; grid: boolean; striped: boolean }>({
   bleed: false,
@@ -42,30 +43,40 @@ export function TableBody(props: React.ComponentPropsWithoutRef<'tbody'>) {
   return <tbody {...props} />
 }
 
-const TableRowContext = createContext<{ href?: string; target?: string; title?: string }>({
+const TableRowContext = createContext<{
+  href?: LinkProps['to'];
+  target?: string; title?: string;
+  params: LinkProps['params'];
+}>({
   href: undefined,
   target: undefined,
   title: undefined,
+  params: {},
 })
 
 export function TableRow({
   href,
   target,
   title,
+  params,
   className,
   children,
   ...props
-}: { href?: string; target?: string; title?: string } & React.ComponentPropsWithoutRef<'tr'>) {
+}: {
+  href?: LinkProps['to'];
+  params?: LinkProps['params'];
+  target?: string; title?: string
+} & React.ComponentPropsWithoutRef<'tr'>) {
   let { striped } = useContext(TableContext)
 
   return (
-    <TableRowContext.Provider value={{ href, target, title } as React.ContextType<typeof TableRowContext>}>
+    <TableRowContext.Provider value={{ href, target, title, params } as React.ContextType<typeof TableRowContext>}>
       <tr
         {...props}
         className={clsx(
           className,
           href &&
-            'has-[[data-row-link][data-focus]]:outline has-[[data-row-link][data-focus]]:outline-2 has-[[data-row-link][data-focus]]:-outline-offset-2 has-[[data-row-link][data-focus]]:outline-blue-500 dark:focus-within:bg-white/[2.5%]',
+          'has-[[data-row-link][data-focus]]:outline has-[[data-row-link][data-focus]]:outline-2 has-[[data-row-link][data-focus]]:-outline-offset-2 has-[[data-row-link][data-focus]]:outline-blue-500 dark:focus-within:bg-white/[2.5%]',
           striped && 'even:bg-zinc-950/[2.5%] dark:even:bg-white/[2.5%]',
           href && striped && 'hover:bg-zinc-950/5 dark:hover:bg-white/5',
           href && !striped && 'hover:bg-zinc-950/[2.5%] dark:hover:bg-white/[2.5%]'
@@ -95,7 +106,7 @@ export function TableHeader({ className, ...props }: React.ComponentPropsWithout
 
 export function TableCell({ className, children, ...props }: React.ComponentPropsWithoutRef<'td'>) {
   let { bleed, dense, grid, striped } = useContext(TableContext)
-  let { href, target, title } = useContext(TableRowContext)
+  let { href, target, title, params } = useContext(TableRowContext)
   let [cellRef, setCellRef] = useState<HTMLElement | null>(null)
 
   return (
@@ -115,8 +126,10 @@ export function TableCell({ className, children, ...props }: React.ComponentProp
         <Link
           data-row-link
           href={href}
+          params={params}
           target={target}
           aria-label={title}
+          //@ts-ignore
           tabIndex={cellRef?.previousElementSibling === null ? 0 : -1}
           className="absolute inset-0 focus:outline-none"
         />
