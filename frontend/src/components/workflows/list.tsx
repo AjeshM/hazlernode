@@ -13,15 +13,12 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { DocTypeQueryParams, useDocType } from '@/queries/frappe';
 import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
-import { Dialog, DialogActions, DialogBody, DialogTitle } from '@/components/ui/dialog'
 import { useState } from 'react';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import CreateWorkflowDialog from '@/components/workflows/create-dialog';
 
 export const WorkflowList = () => {
   const [showNewWorkflowDialog, setShowNewWorkflowDialog] = useState<boolean>(false);
-  const [workflowTitle, setWorkflowTitle] = useState<string>('');
-  const { useList, useSetValueMutation, getListOptions, useCreateDocMutation } =
+  const { useList, useSetValueMutation, getListOptions } =
     useDocType<HazlerWorkflow>('Hazler Workflow');
 
   const queryClient = useQueryClient();
@@ -36,26 +33,6 @@ export const WorkflowList = () => {
 
   const workflowSetValueMutation = useSetValueMutation();
 
-  const createWorkflowMutation = useCreateDocMutation();
-  function handleCreateWorkflow() {
-    if (!workflowTitle) {
-      toast.warning('Title is required')
-      return;
-    }
-    console.log(workflowTitle);
-    // create a new workflow doc
-    createWorkflowMutation.mutate({
-      title: workflowTitle
-    },
-      {
-        onSuccess: () => {
-          setWorkflowTitle('')
-          toast.success("Workflow created successfully")
-          setShowNewWorkflowDialog(false)
-        }
-      }
-    )
-  }
   function toggleEnabled(wf: HazlerWorkflow) {
     const currentWorkflows = queryClient.getQueryData(queryOptions.queryKey);
 
@@ -147,28 +124,10 @@ export const WorkflowList = () => {
           </Table>
         </CardContent>
       </Card>
-      <Dialog
+      <CreateWorkflowDialog
         open={showNewWorkflowDialog}
-        onClose={setShowNewWorkflowDialog}>
-        <DialogTitle>Create New Workflow</DialogTitle>
-        <DialogBody>
-          <div>
-            <Label htmlFor="title">Title</Label>
-            <Input value={workflowTitle}
-              onChange={(v) => setWorkflowTitle(v.target.value)}
-              type="text" id="title"
-              placeholder="Send an email on form submit" />
-          </div>
-          <pre>{workflowTitle}</pre>
-        </DialogBody>
-        <DialogActions>
-          <Button outline onClick={() => setShowNewWorkflowDialog(false)}>
-            Cancel
-          </Button>
-          <Button color="lime"
-            onClick={handleCreateWorkflow}>Create</Button>
-        </DialogActions>
-      </Dialog>
+        onClose={setShowNewWorkflowDialog}
+      />
     </>
   );
 };
