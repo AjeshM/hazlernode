@@ -17,15 +17,16 @@ import { useState } from 'react';
 import CreateWorkflowDialog from '@/components/workflows/create-dialog';
 
 export const WorkflowList = () => {
-  const [showNewWorkflowDialog, setShowNewWorkflowDialog] = useState<boolean>(false);
+  const [showNewWorkflowDialog, setShowNewWorkflowDialog] =
+    useState<boolean>(false);
   const queryClient = useQueryClient();
   const { useList, useSetValueMutation, getListOptions } =
     useDocType<HazlerWorkflow>('Hazler Workflow');
 
   const listOptions: DocTypeQueryParams<HazlerWorkflow> = {
     fields: ['title', 'name', 'enabled'],
-    order_by: 'creation desc'
-  }
+    order_by: 'creation desc',
+  };
 
   const workflowsList = useList(listOptions);
 
@@ -74,8 +75,8 @@ export const WorkflowList = () => {
   if (workflowsList.isLoading) {
     return (
       <>
-        <Skeleton className="w-[30%] h-8" />
-        <Skeleton className="w-[50%] h-8 mt-2" />
+        <Skeleton className="h-8 w-[30%]" />
+        <Skeleton className="mt-2 h-8 w-[50%]" />
       </>
     );
   }
@@ -90,13 +91,18 @@ export const WorkflowList = () => {
     <>
       <Card>
         <CardHeader>
-          <div className="flex justify-between items-center align-baseline">
+          <div className="flex items-center justify-between align-baseline">
             <CardTitle>Your Workflows</CardTitle>
-            <Button color="lime" onClick={() => setShowNewWorkflowDialog(true)}>New Workflow</Button>
+            <Button color="lime" onClick={() => setShowNewWorkflowDialog(true)}>
+              New Workflow
+            </Button>
           </div>
         </CardHeader>
         <CardContent>
-          <Table dense className="[--gutter:theme(spacing.4)] sm:[--gutter:theme(spacing.2)]">
+          <Table
+            dense
+            className="[--gutter:theme(spacing.4)] sm:[--gutter:theme(spacing.2)]"
+          >
             <TableHead>
               <TableRow>
                 <TableHeader>Name</TableHeader>
@@ -105,12 +111,14 @@ export const WorkflowList = () => {
             </TableHead>
             <TableBody>
               {workflows?.map((wf) => (
-                <TableRow key={wf.name} to='/workflow/$id' params={{
-                  id: String(wf.name),
-                }}>
-                  <TableCell className="font-medium">
-                    {wf.title}
-                  </TableCell>
+                <TableRow
+                  key={wf.name}
+                  to="/workflow/$id"
+                  params={{
+                    id: String(wf.name),
+                  }}
+                >
+                  <TableCell className="font-medium">{wf.title}</TableCell>
                   <TableCell align="right">
                     <Switch
                       color="lime"
