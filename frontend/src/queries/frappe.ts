@@ -20,13 +20,13 @@ type DocTypeName =
 export interface DocTypeQueryParams<DT> {
   fields?: ReadonlyArray<keyof DT> | '*';
   filters?: FilterObject<DT>;
-  orFilters?: FilterObject<DT>;
+  or_filters?: FilterObject<DT>;
   limit?: number;
   limit_start?: number;
   start?: number;
-  orderBy?: string;
-  groupBy?: string;
-  asDict?: boolean;
+  order_by?: string;
+  group_by?: string;
+  as_dict?: boolean;
 }
 
 export function useDocType<DT>(doctype: DocTypeName) {
@@ -37,6 +37,7 @@ export function useDocType<DT>(doctype: DocTypeName) {
       getListQueryOptions<DT>(doctype, params),
     useDoc: (name: string) => useQuery(getDocQueryOptions<DT>(doctype, name)),
     useSetValueMutation: () => useSetValueMutation<DT>(doctype),
+    useCreateDocMutation: () => useCreateDocMutation<DT>(doctype)
   };
 }
 function getListQueryOptions<DT>(
@@ -82,13 +83,10 @@ export function useDocumentList<DT>(
   return useQuery(getListQueryOptions<DT>(doctype, params));
 }
 
-type Optional<Type> = {
-  [Property in keyof Type]?: Type[Property];
-};
 
 interface SetValueData<DT> {
   name: string | number;
-  values: Optional<DT>;
+  values: Partial<DT>;
 }
 
 export function useSetValueMutation<DT>(doctype: DocTypeName) {
@@ -118,4 +116,23 @@ export function useSetValueMutation<DT>(doctype: DocTypeName) {
       });
     },
   });
+}
+
+export function useCreateDocMutation<DT>(doctype: DocTypeName,) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (doc: Partial<DT>) => {
+      return makeRequest({
+        type: "document",
+        method: 'POST',
+        path: doctype,
+        params: doc
+      })
+    },
+    onSuccess() {
+      queryClient.invalidateQueries({
+        queryKey: [doctype, 'list'],
+      });
+    },
+  })
 }

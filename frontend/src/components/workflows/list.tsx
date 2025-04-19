@@ -10,25 +10,52 @@ import { Switch } from '@/components/ui/switch';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useDocType, useDocumentList } from '@/queries/frappe';
+import { DocTypeQueryParams, useDocType, useDocumentList } from '@/queries/frappe';
 import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
+import { Dialog, DialogActions, DialogBody, DialogDescription, DialogTitle } from '@/components/ui/dialog'
+import { useState } from 'react';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 export const WorkflowList = () => {
-  const { useList, useSetValueMutation, getListOptions } =
+  const [showNewWorkflowDialog, setShowNewWorkflowDialog] = useState<boolean>(false);
+  const [workflowTitle, setWorkflowTitle] = useState<string>('');
+  const { useList, useSetValueMutation, getListOptions, useCreateDocMutation } =
     useDocType<HazlerWorkflow>('Hazler Workflow');
 
   const queryClient = useQueryClient();
-
-  const workflowsList = useList({
+  const listOptions: DocTypeQueryParams<HazlerWorkflow> = {
     fields: ['title', 'name', 'enabled'],
-  });
+    order_by: 'creation desc'
+  }
 
-  const queryOptions = getListOptions({
-    fields: ['title', 'name', 'enabled'],
-  });
+  const workflowsList = useList(listOptions);
+
+  const queryOptions = getListOptions(listOptions);
+
   const workflowSetValueMutation = useSetValueMutation();
 
+  const createWorkflowMutation = useCreateDocMutation();
+  function handleCreateWorkflow() {
+    if (!workflowTitle) {
+      toast.warning('Title is required')
+      return;
+    }
+    console.log(workflowTitle);
+    // create a new workflow doc
+    createWorkflowMutation.mutate({
+      title: workflowTitle
+    },
+      {
+        onSuccess: () => {
+          setWorkflowTitle('')
+          toast.success("Workflow created successfully")
+          setShowNewWorkflowDialog(false)
+        }
+      }
+    )
+  }
   function toggleEnabled(wf: HazlerWorkflow) {
     const currentWorkflows = queryClient.getQueryData(queryOptions.queryKey);
 
@@ -88,7 +115,7 @@ export const WorkflowList = () => {
         <CardHeader>
           <div className="flex justify-between items-center">
             <CardTitle>Your Workflows</CardTitle>
-            <Button color="lime">New Workflow</Button>
+            <Button color="lime" onClick={() => setShowNewWorkflowDialog(true)}>New Workflow</Button>
           </div>
         </CardHeader>
         <CardContent>
@@ -116,6 +143,28 @@ export const WorkflowList = () => {
           </Table>
         </CardContent>
       </Card>
+      <Dialog
+        open={showNewWorkflowDialog}
+        onClose={setShowNewWorkflowDialog}>
+        <DialogTitle>Create New Workflow</DialogTitle>
+        <DialogBody>
+          <div>
+            <Label htmlFor="title">Title</Label>
+            <Input value={workflowTitle}
+              onChange={(v) => setWorkflowTitle(v.target.value)}
+              type="text" id="title"
+              placeholder="Send an email on form submit" />
+          </div>
+          <pre>{workflowTitle}</pre>
+        </DialogBody>
+        <DialogActions>
+          <Button outline onClick={() => setShowNewWorkflowDialog(false)}>
+            Cancel
+          </Button>
+          <Button color="lime"
+            onClick={handleCreateWorkflow}>Create</Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };
