@@ -10,10 +10,10 @@ import { Switch } from '@/components/ui/switch';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
-import { DocTypeQueryParams, useDocType, useDocumentList } from '@/queries/frappe';
+import { DocTypeQueryParams, useDocType } from '@/queries/frappe';
 import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
-import { Dialog, DialogActions, DialogBody, DialogDescription, DialogTitle } from '@/components/ui/dialog'
+import { Dialog, DialogActions, DialogBody, DialogTitle } from '@/components/ui/dialog'
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
