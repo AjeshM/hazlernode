@@ -40,7 +40,7 @@ export default function CreateWorkflowDialog({
       {
         onSuccess: (doc) => {
           setWorkflowTitle('');
-          toast.success('Workflow created successfully!');
+          toast.success('🚀 New workflow created!');
           onClose(false);
           navigate({
             to: '/workflow/$id',
