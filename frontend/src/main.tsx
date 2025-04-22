@@ -10,7 +10,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 // Import the generated route tree
 import { routeTree } from './routeTree.gen';
 import { getSessionUserId } from './data/session';
-import { Skeleton } from './components/ui/skeleton';
+import { Skeleton } from '@/components/ui/skeleton';
 
 // Create a new router instance
 const router = createRouter({
