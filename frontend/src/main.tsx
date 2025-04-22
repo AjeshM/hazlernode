@@ -11,6 +11,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { routeTree } from './routeTree.gen';
 import { getSessionUserId } from './data/session';
 import { Skeleton } from '@/components/ui/skeleton';
+import { ConfirmDialogProvider } from '@/components/common/confirm-dialog';
 
 // Create a new router instance
 const router = createRouter({
@@ -43,7 +44,9 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     {/* // Provide the client to your App */}
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <ConfirmDialogProvider>
+        <RouterProvider router={router} />
+      </ConfirmDialogProvider>
     </QueryClientProvider>
     {/* <App/> */}
   </StrictMode>,

@@ -19,9 +19,10 @@ function WorkflowDetails() {
 
   function handleDeleteWorkflow() {
     // todo: ask for confirmation
-    deleteWorkflowMutation.mutate({
-      name: params.id,
-    }),
+    deleteWorkflowMutation.mutate(
+      {
+        name: params.id,
+      },
       {
         onSuccess: () => {
           navigate({
@@ -29,7 +30,8 @@ function WorkflowDetails() {
           });
           toast.success('Workflow deleted successfully!!!');
         },
-      };
+      },
+    );
   }
   return (
     <>
