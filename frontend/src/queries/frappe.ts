@@ -42,6 +42,7 @@ export function useDocType<DT>(doctype: DocTypeName) {
     useCreateDocMutation: () => useCreateDocMutation<DT>(doctype),
     useSuspenseDoc: (name: string) =>
       useSuspenseQuery(getDocQueryOptions<DT>(doctype, name)),
+    useDeleteDocMutation: () => useDeleteDocMutation(doctype),
   };
 }
 export function getListQueryOptions<DT>(
@@ -133,6 +134,24 @@ export function useCreateDocMutation<DT>(doctype: DocTypeName) {
       });
     },
     onSuccess() {
+      queryClient.invalidateQueries({
+        queryKey: [doctype, 'list'],
+      });
+    },
+  });
+}
+export function useDeleteDocMutation(doctype: DocTypeName) {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (variables: { name: string }) => {
+      return makeRequest({
+        type: 'document',
+        method: 'DELETE',
+        path: `${doctype}/${variables.name}`,
+      });
+    },
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [doctype, 'list'],
       });
