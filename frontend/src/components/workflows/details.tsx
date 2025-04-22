@@ -96,7 +96,7 @@ export function WorkflowDetails() {
             onConnect={onConnect}
             nodeTypes={nodeTypes}
           >
-            <Controls />
+            <Controls position="top-right" />
             <MiniMap />
             <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
           </ReactFlow>

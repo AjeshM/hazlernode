@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { Handle, Position } from '@xyflow/react';
+import { Handle, NodeProps, Position, Node } from '@xyflow/react';
 import { Card, CardContent, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import {
@@ -11,7 +11,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 
-export default function WorkflowNode({ data }: { data: HazlerNode }) {
+export default function WorkflowNode({ data }: NodeProps<Node<HazlerNode>>) {
   return (
     <>
       <Handle type="target" position={Position.Bottom} />
