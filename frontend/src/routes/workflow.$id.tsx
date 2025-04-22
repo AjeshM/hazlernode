@@ -1,8 +1,5 @@
-import { Button } from '@/components/ui/button';
-import { useConfirm } from '@/hooks/confirm';
-import { useDocType } from '@/queries/frappe';
-import { createFileRoute, useNavigate } from '@tanstack/react-router';
-import { toast } from 'sonner';
+import { WorkflowDetails } from '@/components/workflows/details';
+import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/workflow/$id')({
   // loader: ({ context: { queryClient }, params: { id } }) => {
@@ -10,47 +7,3 @@ export const Route = createFileRoute('/workflow/$id')({
   // },
   component: WorkflowDetails,
 });
-function WorkflowDetails() {
-  const params = Route.useParams();
-  const navigate = useNavigate();
-  const confirm = useConfirm();
-  const { useSuspenseDoc, useDeleteDocMutation } =
-    useDocType<HazlerWorkflow>('Hazler Workflow');
-  const workflowDoc = useSuspenseDoc(params.id);
-  const deleteWorkflowMutation = useDeleteDocMutation();
-
-  async function handleDeleteWorkflow() {
-    const deleteConfirmed = await confirm({
-      title: 'Delete Workflow',
-      description: 'Are you sure?',
-      actionType: 'danger',
-    });
-
-    if (!deleteConfirmed) {
-      return;
-    }
-    deleteWorkflowMutation.mutate(
-      {
-        name: params.id,
-      },
-      {
-        onSuccess: () => {
-          navigate({
-            to: '/',
-          });
-          toast.success('Workflow deleted successfully!!!');
-        },
-      },
-    );
-  }
-  return (
-    <>
-      <div>
-        <pre>{JSON.stringify(workflowDoc.data, null, 2)}</pre>
-        <Button color="rose" onClick={handleDeleteWorkflow}>
-          Delete Workflow
-        </Button>
-      </div>
-    </>
-  );
-}
