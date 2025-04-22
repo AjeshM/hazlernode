@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { useConfirm } from '@/hooks/confirm';
 import { useDocType } from '@/queries/frappe';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { toast } from 'sonner';
@@ -12,13 +13,22 @@ export const Route = createFileRoute('/workflow/$id')({
 function WorkflowDetails() {
   const params = Route.useParams();
   const navigate = useNavigate();
+  const confirm = useConfirm();
   const { useSuspenseDoc, useDeleteDocMutation } =
     useDocType<HazlerWorkflow>('Hazler Workflow');
   const workflowDoc = useSuspenseDoc(params.id);
   const deleteWorkflowMutation = useDeleteDocMutation();
 
-  function handleDeleteWorkflow() {
-    // todo: ask for confirmation
+  async function handleDeleteWorkflow() {
+    const deleteConfirmed = await confirm({
+      title: 'Delete Workflow',
+      description: 'Are you sure?',
+      actionType: 'danger',
+    });
+
+    if (!deleteConfirmed) {
+      return;
+    }
     deleteWorkflowMutation.mutate(
       {
         name: params.id,
