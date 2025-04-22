@@ -7,6 +7,7 @@ import {
   useNodesState,
   useEdgesState,
   addEdge,
+  BackgroundVariant,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
@@ -16,7 +17,7 @@ const initialNodes = [
 ];
 const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
 
-export default function Editor() {
+export default function WorkflowEditor({ width, height }) {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
@@ -26,7 +27,13 @@ export default function Editor() {
   );
 
   return (
-    <div style={{ width: '90vw', height: '90vh', border: '2x solid hotpink' }}>
+    <div
+      style={{
+        width: width || '90vw',
+        height: height || '90vh',
+        border: '2x solid hotpink',
+      }}
+    >
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -36,7 +43,7 @@ export default function Editor() {
       >
         <Controls />
         <MiniMap />
-        <Background variant="dots" gap={12} size={1} />
+        <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
       </ReactFlow>
     </div>
   );
