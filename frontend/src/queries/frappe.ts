@@ -4,7 +4,7 @@ import {
   useQuery,
   useMutation,
   useQueryClient,
-  useSuspenseQuery
+  useSuspenseQuery,
 } from '@tanstack/react-query';
 
 type FilterObject<DT> = Record<
@@ -87,7 +87,6 @@ export function useDocumentList<DT>(
   return useQuery(getListQueryOptions<DT>(doctype, params));
 }
 
-
 interface SetValueData<DT> {
   name: string | number;
   values: Partial<DT>;
@@ -122,21 +121,21 @@ export function useSetValueMutation<DT>(doctype: DocTypeName) {
   });
 }
 
-export function useCreateDocMutation<DT>(doctype: DocTypeName,) {
+export function useCreateDocMutation<DT>(doctype: DocTypeName) {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (doc: Partial<DT>) => {
+    mutationFn: (doc: Partial<DT>): Promise<DT> => {
       return makeRequest({
-        type: "document",
+        type: 'document',
         method: 'POST',
         path: doctype,
-        params: doc
-      })
+        params: doc,
+      });
     },
     onSuccess() {
       queryClient.invalidateQueries({
         queryKey: [doctype, 'list'],
       });
     },
-  })
+  });
 }
