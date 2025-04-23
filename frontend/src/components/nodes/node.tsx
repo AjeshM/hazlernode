@@ -10,6 +10,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import { PencilIcon } from 'lucide-react';
 
 export default function WorkflowNode({ data }: NodeProps<Node<HazlerNode>>) {
   return (
@@ -20,7 +21,9 @@ export default function WorkflowNode({ data }: NodeProps<Node<HazlerNode>>) {
           <p>{data.type}</p>
           <Sheet key="bottom">
             <SheetTrigger asChild>
-              <Button outline>Edit</Button>
+              <Button plain>
+                <PencilIcon size={16} />
+              </Button>
             </SheetTrigger>
             <SheetContent>
               <SheetHeader>
