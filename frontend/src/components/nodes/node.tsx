@@ -1,5 +1,11 @@
 import { useCallback } from 'react';
-import { Handle, NodeProps, Position, Node } from '@xyflow/react';
+import {
+  Handle,
+  NodeProps,
+  Position,
+  Node,
+  useOnSelectionChange,
+} from '@xyflow/react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { PencilIcon } from 'lucide-react';
@@ -11,10 +17,22 @@ export default function WorkflowNode({
   selected,
 }: NodeProps<Node<HazlerNode>>) {
   const { setOpen } = useSheet();
+  useOnSelectionChange({
+    onChange: ({ nodes }) => {
+      for (const node of nodes) {
+        if (node.id == String(data.name)) {
+          setOpen(true);
+        }
+      }
+    },
+  });
   return (
     <>
       <Handle type="target" position={Position.Bottom} />
-      <Card className={selected ? 'border-2 border-lime-400/80' : ''}>
+      <Card
+        className={selected ? 'border-2 border-lime-400/80' : ''}
+        style={{ minWidth: '24rem' }}
+      >
         <CardHeader className="flex items-center justify-between p-3">
           <CardTitle>
             {data.type}
