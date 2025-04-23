@@ -12,11 +12,14 @@ import {
 } from '@/components/ui/sheet';
 import { PencilIcon } from 'lucide-react';
 
-export default function WorkflowNode({ data }: NodeProps<Node<HazlerNode>>) {
+export default function WorkflowNode({
+  data,
+  selected,
+}: NodeProps<Node<HazlerNode>>) {
   return (
     <>
       <Handle type="target" position={Position.Bottom} />
-      <Card className="p-2">
+      <Card className={selected ? 'border-2 border-lime-400/80' : ''}>
         <CardHeader className="flex items-center justify-between p-3">
           <p>{data.type}</p>
           <Sheet key="bottom">
