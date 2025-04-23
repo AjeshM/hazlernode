@@ -19,7 +19,7 @@ import '@xyflow/react/dist/style.css';
 import { useCallback, useMemo } from 'react';
 import WorkflowNode from '@/components/nodes/node';
 import { NodeDetailsSheetProvider } from '@/components/nodes/details-sheet';
-
+import type { Node } from '@xyflow/react';
 export function WorkflowDetails() {
   const params = WorkflowDetailsRoute.useParams();
   const navigate = useNavigate();
@@ -63,15 +63,25 @@ export function WorkflowDetails() {
     );
   }
 
-  const workflowNodes = workflowDoc.data?.nodes?.map((node) => {
-    return {
+  const hazelNodes = workflowDoc.data.nodes || [];
+  const processedNodes: Array<Node<HazlerNode>> = [];
+
+  let currentY = 100;
+  const stepY = 120;
+  const centerX = 300;
+
+  for (const node of hazelNodes) {
+    processedNodes.push({
       id: String(node.name),
-      position: { x: node.position_x, y: node.position_y },
+      position: { x: centerX, y: currentY },
       data: { ...node },
-      type: 'workflowNode',
-    };
-  });
-  const [nodes, setNodes, onNodesChange] = useNodesState(workflowNodes || []);
+      draggable: false,
+      focusable: true,
+    });
+    // layout vertically
+    currentY += stepY;
+  }
+  const [nodes, setNodes, onNodesChange] = useNodesState(processedNodes || []);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const onConnect = useCallback(
     // @ts-ignore
