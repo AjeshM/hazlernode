@@ -18,6 +18,7 @@ import {
 import '@xyflow/react/dist/style.css';
 import { useCallback, useMemo } from 'react';
 import WorkflowNode from '@/components/nodes/node';
+import { NodeDetailsSheetProvider } from '@/components/nodes/details-sheet';
 
 export function WorkflowDetails() {
   const params = WorkflowDetailsRoute.useParams();
@@ -73,6 +74,7 @@ export function WorkflowDetails() {
   const [nodes, setNodes, onNodesChange] = useNodesState(workflowNodes || []);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const onConnect = useCallback(
+    // @ts-ignore
     (params) => setEdges((eds) => addEdge(params, eds)),
     [setEdges],
   );
@@ -87,19 +89,21 @@ export function WorkflowDetails() {
           </Button>
         </div>
         <div className="col-span-2">
-          <ReactFlow
-            className="h-full w-full"
-            nodes={nodes}
-            edges={edges}
-            onNodesChange={onNodesChange}
-            onEdgesChange={onEdgesChange}
-            onConnect={onConnect}
-            nodeTypes={nodeTypes}
-          >
-            <Controls position="top-right" />
-            <MiniMap />
-            <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
-          </ReactFlow>
+          <NodeDetailsSheetProvider>
+            <ReactFlow
+              className="h-full w-full"
+              nodes={nodes}
+              edges={edges}
+              onNodesChange={onNodesChange}
+              onEdgesChange={onEdgesChange}
+              onConnect={onConnect}
+              nodeTypes={nodeTypes}
+            >
+              <Controls position="top-right" />
+              <MiniMap />
+              <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
+            </ReactFlow>
+          </NodeDetailsSheetProvider>
         </div>
       </div>
     </>
