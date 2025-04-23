@@ -1,5 +1,5 @@
 
-export interface HazlerNodeType {
+export interface HazlerNodeType{
 	name: string
 	creation: string
 	modified: string
@@ -10,8 +10,10 @@ export interface HazlerNodeType {
 	parentfield?: string
 	parenttype?: string
 	idx?: number
-	/**	Preview Image : Attach	*/
+	/**	Preview Image : Attach Image	*/
 	preview_image?: string
 	/**	Description : Small Text	*/
 	description?: string
+	/**	Kind : Select	*/
+	kind: "Trigger" | "Action"
 }

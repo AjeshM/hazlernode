@@ -8,7 +8,8 @@
   "position_x",
   "position_y",
   "column_break_vjzv",
-  "type"
+  "type",
+  "kind"
  ],
  "fields": [
   {
@@ -36,13 +37,20 @@
    "in_list_view": 1,
    "label": "Position Y",
    "reqd": 1
+  },
+  {
+   "fetch_from": "type.kind",
+   "fieldname": "kind",
+   "fieldtype": "Select",
+   "label": "Kind",
+   "read_only": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-04-17 19:52:58.244315",
+ "modified": "2025-04-23 09:00:24.823211",
  "modified_by": "Administrator",
  "module": "Hazlernode",
  "name": "Hazler Node",

@@ -8,12 +8,13 @@
  "field_order": [
   "preview_image",
   "description",
-  "column_break_nmgp"
+  "column_break_nmgp",
+  "kind"
  ],
  "fields": [
   {
    "fieldname": "preview_image",
-   "fieldtype": "Attach",
+   "fieldtype": "Attach Image",
    "label": "Preview Image"
   },
   {
@@ -24,12 +25,20 @@
   {
    "fieldname": "column_break_nmgp",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "kind",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Kind",
+   "options": "Trigger\nAction",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-04-17 19:08:00.456110",
+ "modified": "2025-04-23 08:57:18.506430",
  "modified_by": "Administrator",
  "module": "Hazlernode",
  "name": "Hazler Node Type",
