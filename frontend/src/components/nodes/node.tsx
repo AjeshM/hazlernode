@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { Handle, NodeProps, Position, Node } from '@xyflow/react';
-import { Card, CardContent, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import {
   Sheet,
@@ -16,7 +16,7 @@ export default function WorkflowNode({ data }: NodeProps<Node<HazlerNode>>) {
     <>
       <Handle type="target" position={Position.Bottom} />
       <Card className="p-2">
-        <CardTitle className="flex items-center justify-between p-3">
+        <CardHeader className="flex items-center justify-between p-3">
           <p>{data.type}</p>
           <Sheet key="bottom">
             <SheetTrigger asChild>
@@ -32,7 +32,7 @@ export default function WorkflowNode({ data }: NodeProps<Node<HazlerNode>>) {
               </SheetHeader>
             </SheetContent>
           </Sheet>
-        </CardTitle>
+        </CardHeader>
         <CardContent>
           <pre>{JSON.stringify(data, null, 2)}</pre>
         </CardContent>
