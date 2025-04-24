@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import {
   Handle,
   NodeProps,
@@ -16,19 +15,19 @@ export default function WorkflowNode({
   data,
   selected,
 }: NodeProps<Node<HazlerNode>>) {
+  
   const { setOpen } = useSheet();
   useOnSelectionChange({
     onChange: ({ nodes }) => {
       for (const node of nodes) {
         if (node.id == String(data.name)) {
-          setOpen(true);
+          setOpen(true, data);
         }
       }
     },
   });
   return (
     <>
-      <Handle type="target" position={Position.Bottom} />
       <Card
         className={selected ? 'border-2 border-lime-400/80' : ''}
         style={{ minWidth: '24rem' }}
@@ -43,7 +42,7 @@ export default function WorkflowNode({
               {data.kind}
             </Badge>
           </CardTitle>
-          <Button plain onClick={() => setOpen(true)}>
+          <Button plain onClick={() => setOpen(true, data)}>
             <PencilIcon size={16} />
           </Button>
         </CardHeader>
@@ -51,6 +50,8 @@ export default function WorkflowNode({
           <pre>{JSON.stringify(data, null, 2)}</pre>
         </CardContent>
       </Card>
+      <Handle type="source" position={Position.Bottom} />
+      <Handle type="target" position={Position.Top} />
     </>
   );
 }

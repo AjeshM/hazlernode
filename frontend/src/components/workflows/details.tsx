@@ -63,14 +63,14 @@ export function WorkflowDetails() {
     );
   }
 
-  const hazelNodes = workflowDoc.data.nodes || [];
+  const hazlerNodes = workflowDoc.data.nodes || [];
   const processedNodes: Array<Node<HazlerNode>> = [];
 
   let currentY = 100;
   const stepY = 120;
   const centerX = 300;
 
-  for (const node of hazelNodes) {
+  for (const node of hazlerNodes) {
     processedNodes.push({
       id: String(node.name),
       position: { x: centerX, y: currentY },
