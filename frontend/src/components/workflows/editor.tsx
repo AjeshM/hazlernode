@@ -13,6 +13,7 @@ import '@xyflow/react/dist/style.css';
 import { NodeDetailsSheetProvider } from '@/components/nodes/details-sheet';
 import WorkflowNode from '@/components/nodes/node';
 import AddNewNode from '@/components/nodes/add-new-node';
+import { useEditorStore } from '@/stores/workflow-editor';
 
 export default function WorkflowEditor({
   hazlerNodes,
@@ -27,23 +28,30 @@ export default function WorkflowEditor({
     }),
     [],
   );
-  const [nodes, setNodes, onNodesChange] = useNodesState([]);
-  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+
+  const editorStore = useEditorStore((state) => ({
+    nodes: state.nodes,
+    edges: state.edges,
+    onNodesChange: state.onNodesChange,
+    onEdgesChange: state.onEdgesChange,
+    setNodes: state.setNodes,
+    setEdges: state.setEdges,
+  }));
 
   useEffect(() => {
     const processedNodes = getProcessedNodes(hazlerNodes);
-    setNodes(processedNodes);
-    setEdges(getProcessedEdges(processedNodes));
-  }, [hazlerNodes, setNodes, setEdges]);
+    editorStore.setNodes(processedNodes);
+    editorStore.setEdges(getProcessedEdges(processedNodes));
+  }, [hazlerNodes]);
 
   return (
     <NodeDetailsSheetProvider>
       <ReactFlow
         className="h-full w-full"
-        nodes={nodes}
-        edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
+        nodes={editorStore.nodes}
+        edges={editorStore.edges}
+        onNodesChange={editorStore.onNodesChange}
+        onEdgesChange={editorStore.onEdgesChange}
         nodeTypes={nodeTypes}
       >
         <Controls position={'top-right'} />
