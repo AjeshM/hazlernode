@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useEffect, useMemo } from 'react';
 import {
   ReactFlow,
   MiniMap,
@@ -6,45 +6,90 @@ import {
   Background,
   useNodesState,
   useEdgesState,
-  addEdge,
   BackgroundVariant,
+  Edge,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
+import { NodeDetailsSheetProvider } from '@/components/nodes/details-sheet';
+import WorkflowNode from '@/components/nodes/node';
 
-const initialNodes = [
-  { id: '1', position: { x: 0, y: 0 }, data: { label: '1' } },
-  { id: '2', position: { x: 0, y: 100 }, data: { label: '2' } },
-];
-const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
-
-export default function WorkflowEditor({ width, height }) {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-
-  const onConnect = useCallback(
-    (params) => setEdges((eds) => addEdge(params, eds)),
-    [setEdges],
+export default function WorkflowEditor({
+  hazlerNodes,
+}: {
+  hazlerNodes: Array<HazlerNode>;
+}) {
+  // Registering custom node types
+  const nodeTypes = useMemo(
+    () => ({
+      workflowNode: WorkflowNode,
+    }),
+    [],
   );
+  const [nodes, setNodes, onNodesChange] = useNodesState([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+
+  useEffect(() => {
+    const processedNodes = getProcessedNodes(hazlerNodes);
+    setNodes(processedNodes);
+    setEdges(getProcessedEdges(processedNodes));
+  }, [hazlerNodes, setNodes, setEdges]);
 
   return (
-    <div
-      style={{
-        width: width || '90vw',
-        height: height || '90vh',
-        border: '2x solid hotpink',
-      }}
-    >
+    <NodeDetailsSheetProvider>
       <ReactFlow
+        className="h-full w-full"
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
+        nodeTypes={nodeTypes}
       >
-        <Controls />
+        <Controls position={'top-right'} />
         <MiniMap />
         <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
       </ReactFlow>
-    </div>
+    </NodeDetailsSheetProvider>
   );
+}
+function getProcessedNodes(hazelNodes: Array<HazlerNode>): Array<Node> {
+  const processedNodes: Array<Node<HazlerNode>> = [];
+
+  let currentY = 100;
+  const stepY = 120;
+  const centerX = 300;
+
+  for (const node of hazelNodes) {
+    processedNodes.push({
+      id: node.name,
+      position: { x: centerX, y: currentY },
+      data: { ...node },
+      type: 'workflowNode',
+      draggable: false,
+      focusable: true,
+      // deletable: false, TODO: Enable when we are handling this!
+    });
+
+    // layout vertically
+    currentY += stepY;
+  }
+
+  return processedNodes;
+}
+
+function getProcessedEdges(
+  processedNodes: Array<Node<HazlerNode>>,
+): Array<Edge> {
+  const processedEdges: Array<Edge> = [];
+
+  // connect 1 with 2, 2 with 3, 3 with 4, etc.
+  for (let i = 0; i < processedNodes.length - 1; i++) {
+    processedEdges.push({
+      id: `${processedNodes[i].id}-${processedNodes[i + 1].id}`,
+      source: processedNodes[i].id,
+      target: processedNodes[i + 1].id,
+      deletable: false,
+    });
+  }
+
+  return processedEdges;
 }
