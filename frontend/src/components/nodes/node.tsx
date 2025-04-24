@@ -5,7 +5,7 @@ import {
   Node,
   useOnSelectionChange,
 } from '@xyflow/react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { PencilIcon } from 'lucide-react';
 import { useSheet } from '@/hooks/node-sheets';
@@ -15,12 +15,11 @@ export default function WorkflowNode({
   data,
   selected,
 }: NodeProps<Node<HazlerNode>>) {
-  
   const { setOpen } = useSheet();
   useOnSelectionChange({
     onChange: ({ nodes }) => {
       for (const node of nodes) {
-        if (node.id == String(data.name)) {
+        if (node.id === String(data.name)) {
           setOpen(true, data);
         }
       }
@@ -46,9 +45,10 @@ export default function WorkflowNode({
             <PencilIcon size={16} />
           </Button>
         </CardHeader>
-        <CardContent>
-          <pre>{JSON.stringify(data, null, 2)}</pre>
-        </CardContent>
+        {/* {selected && (
+          <CardContent>
+          </CardContent>
+        )} */}
       </Card>
       <Handle type="source" position={Position.Bottom} />
       <Handle type="target" position={Position.Top} />

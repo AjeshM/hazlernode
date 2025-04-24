@@ -12,6 +12,7 @@ import {
 import '@xyflow/react/dist/style.css';
 import { NodeDetailsSheetProvider } from '@/components/nodes/details-sheet';
 import WorkflowNode from '@/components/nodes/node';
+import AddNewNode from '@/components/nodes/add-new-node';
 
 export default function WorkflowEditor({
   hazlerNodes,
@@ -22,6 +23,7 @@ export default function WorkflowEditor({
   const nodeTypes = useMemo(
     () => ({
       workflowNode: WorkflowNode,
+      addNewNode: AddNewNode,
     }),
     [],
   );
@@ -55,14 +57,14 @@ export default function WorkflowEditor({
     </NodeDetailsSheetProvider>
   );
 }
-function getProcessedNodes(hazelNodes: Array<HazlerNode>): Array<Node> {
-  const processedNodes: Array<Node<HazlerNode>> = [];
+function getProcessedNodes(hazlerNodes: Array<HazlerNode>): Array<Node> {
+  const processedNodes: Array<Node<HazlerNode | null>> = [];
 
   let currentY = 100;
   const stepY = 120;
   const centerX = 300;
 
-  for (const node of hazelNodes) {
+  for (const node of hazlerNodes) {
     processedNodes.push({
       id: node.name,
       position: { x: centerX, y: currentY },
@@ -76,6 +78,15 @@ function getProcessedNodes(hazelNodes: Array<HazlerNode>): Array<Node> {
     // layout vertically
     currentY += stepY;
   }
+  // To allow user to add new nodes
+  processedNodes.push({
+    id: 'add-new',
+    position: { x: centerX, y: currentY },
+    data: null,
+    type: 'addNewNode',
+    draggable: false,
+    focusable: true,
+  });
 
   return processedNodes;
 }
