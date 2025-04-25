@@ -10,6 +10,8 @@ app_license = "agpl-3.0"
 
 # required_apps = []
 
+export_python_type_annotations = True
+
 # Each item in the list will be shown as an app in the apps page
 # add_to_apps_screen = [
 # 	{
@@ -243,4 +245,6 @@ app_license = "agpl-3.0"
 # }
 
 
-website_route_rules = [{'from_route': '/frontend/<path:app_path>', 'to_route': 'hazlernode'},]
+website_route_rules = [
+    {"from_route": "/frontend/<path:app_path>", "to_route": "hazlernode"},
+]

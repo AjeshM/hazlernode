@@ -1,6 +1,6 @@
 import { HazlerNode } from './HazlerNode'
 
-export interface HazlerWorkflow {
+export interface HazlerWorkflow{
 	name: number
 	creation: string
 	modified: string
