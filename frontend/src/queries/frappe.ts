@@ -46,7 +46,7 @@ export function useDocType<DT>(doctype: DocTypeName) {
   };
 }
 export function getListQueryOptions<DT>(
-  doctype: string,
+  doctype: DocTypeName,
   params: DocTypeQueryParams<DT>,
 ) {
   if (!params.fields) {
