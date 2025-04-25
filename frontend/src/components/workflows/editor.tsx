@@ -29,7 +29,7 @@ export default function WorkflowEditor({
     [],
   );
 
-  const editorStore = useEditorStore((state) => ({
+  /*  const editorStore = useEditorStore((state) => ({
     nodes: state.nodes,
     edges: state.edges,
     onNodesChange: state.onNodesChange,
@@ -37,7 +37,8 @@ export default function WorkflowEditor({
     setNodes: state.setNodes,
     setEdges: state.setEdges,
   }));
-
+ */
+  const editorStore = useEditorStore.getState();
   useEffect(() => {
     const processedNodes = getProcessedNodes(hazlerNodes);
     editorStore.setNodes(processedNodes);
