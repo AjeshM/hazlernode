@@ -1,7 +1,7 @@
 import { HazlerEventParam } from './HazlerEventParam'
 
-export interface HazlerNodeType{
-	name: string
+export interface HazlerNodeEventType{
+	name: number
 	creation: string
 	modified: string
 	owner: string
@@ -11,12 +11,10 @@ export interface HazlerNodeType{
 	parentfield?: string
 	parenttype?: string
 	idx?: number
-	/**	Preview Image : Attach Image	*/
-	preview_image?: string
-	/**	Description : Small Text	*/
-	description?: string
-	/**	Kind : Select	*/
-	kind: "Trigger" | "Action"
+	/**	Title : Data	*/
+	title: string
+	/**	Node Type : Link - Hazler Node Type	*/
+	node_type: string
 	/**	Params : Table - Hazler Event Param	*/
 	params?: HazlerEventParam[]
 }

@@ -1,0 +1,73 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2025-04-25 08:45:55.159171",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "column_break_xvla",
+  "node_type",
+  "section_break_nzik",
+  "params"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Title",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_xvla",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "node_type",
+   "fieldtype": "Link",
+   "label": "Node Type",
+   "options": "Hazler Node Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_nzik",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "params",
+   "fieldtype": "Table",
+   "label": "Params",
+   "options": "Hazler Event Param"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-04-25 09:21:28.059806",
+ "modified_by": "Administrator",
+ "module": "Hazlernode",
+ "name": "Hazler Node Event Type",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "show_title_field_in_link": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "title",
+ "track_changes": 1
+}

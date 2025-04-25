@@ -9,7 +9,9 @@
   "preview_image",
   "description",
   "column_break_nmgp",
-  "kind"
+  "kind",
+  "section_break_ckxl",
+  "params"
  ],
  "fields": [
   {
@@ -33,12 +35,27 @@
    "label": "Kind",
    "options": "Trigger\nAction",
    "reqd": 1
+  },
+  {
+   "fieldname": "section_break_ckxl",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "params",
+   "fieldtype": "Table",
+   "label": "Params",
+   "options": "Hazler Event Param"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2025-04-23 08:57:18.506430",
+ "links": [
+  {
+   "link_doctype": "Hazler Node Event Type",
+   "link_fieldname": "node_type"
+  }
+ ],
+ "modified": "2025-04-25 09:05:12.452386",
  "modified_by": "Administrator",
  "module": "Hazlernode",
  "name": "Hazler Node Type",

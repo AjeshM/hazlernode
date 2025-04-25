@@ -10,12 +10,12 @@ export interface HazlerNode{
 	parentfield?: string
 	parenttype?: string
 	idx?: number
-	/**	Position X : Float	*/
-	position_x: number
-	/**	Position Y : Float	*/
-	position_y: number
 	/**	Type : Link - Hazler Node Type	*/
 	type: string
 	/**	Kind : Select	*/
 	kind?: string
+	/**	Event : Link - Hazler Node Event Type	*/
+	event?: string
+	/**	Parameters : JSON	*/
+	parameters?: any
 }
