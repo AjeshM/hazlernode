@@ -10,7 +10,6 @@ import {
   Edge,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
-import { NodeDetailsSheetProvider } from '@/components/nodes/details-sheet';
 import WorkflowNode from '@/components/nodes/node';
 import AddNewNode from '@/components/nodes/add-new-node';
 import { useEditorStore } from '@/stores/workflow-editor';
@@ -46,24 +45,22 @@ export default function WorkflowEditor({
   }, [hazlerNodes]);
 
   return (
-    <NodeDetailsSheetProvider>
-      <ReactFlow
-        className="h-full w-full"
-        nodes={editorStore.nodes}
-        edges={editorStore.edges}
-        onNodesChange={editorStore.onNodesChange}
-        onEdgesChange={editorStore.onEdgesChange}
-        nodeTypes={nodeTypes}
-      >
-        <Controls position={'top-right'} />
-        <Background
-          className="bg-zinc-50"
-          variant={BackgroundVariant.Dots}
-          gap={12}
-          size={1}
-        />
-      </ReactFlow>
-    </NodeDetailsSheetProvider>
+    <ReactFlow
+      className="h-full w-full"
+      nodes={editorStore.nodes}
+      edges={editorStore.edges}
+      onNodesChange={editorStore.onNodesChange}
+      onEdgesChange={editorStore.onEdgesChange}
+      nodeTypes={nodeTypes}
+    >
+      <Controls position={'top-right'} />
+      <Background
+        className="bg-zinc-50"
+        variant={BackgroundVariant.Dots}
+        gap={12}
+        size={1}
+      />
+    </ReactFlow>
   );
 }
 function getProcessedNodes(hazlerNodes: Array<HazlerNode>): Array<Node> {
