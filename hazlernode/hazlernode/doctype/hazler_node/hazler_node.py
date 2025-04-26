@@ -1,26 +1,34 @@
 # Copyright (c) 2025, Ajesh Jagdish Meshram and contributors
 # For license information, please see license.txt
 
-# import frappe
+import frappe
 from frappe.model.document import Document
 
 
 class HazlerNode(Document):
-	# begin: auto-generated types
-	# This code is auto-generated. Do not modify anything in this block.
+    # begin: auto-generated types
+    # This code is auto-generated. Do not modify anything in this block.
 
-	from typing import TYPE_CHECKING
+    from typing import TYPE_CHECKING
 
-	if TYPE_CHECKING:
-		from frappe.types import DF
+    if TYPE_CHECKING:
+        from frappe.types import DF
 
-		event: DF.Link | None
-		kind: DF.Literal[None]
-		name: DF.Int | None
-		parameters: DF.JSON | None
-		parent: DF.Data
-		parentfield: DF.Data
-		parenttype: DF.Data
-		type: DF.Link
-	# end: auto-generated types
-	pass
+        event: DF.Link | None
+        kind: DF.Literal[None]
+        name: DF.Int | None
+        parameters: DF.JSON | None
+        parent: DF.Data
+        parentfield: DF.Data
+        parenttype: DF.Data
+        type: DF.Link
+    # end: auto-generated types
+    def execute(self, params=None, context=None):
+        handler_path = frappe.db.get_value(
+            "Hazler Node Type", self.type, "handler_path"
+        )
+        module_path, classname = handler_path.rsplit(".", 1)
+        module = frappe.get_module(module_path)
+        class_ = getattr(module, classname, None)
+        print("=-" * 20)
+        class_().execute(self.event, params, context)

@@ -10,6 +10,7 @@
   "description",
   "column_break_nmgp",
   "kind",
+  "handler_path",
   "section_break_ckxl",
   "params"
  ],
@@ -45,6 +46,13 @@
    "fieldtype": "Table",
    "label": "Params",
    "options": "Hazler Event Param"
+  },
+  {
+   "description": "Dotted path to the handler class",
+   "fieldname": "handler_path",
+   "fieldtype": "Data",
+   "label": "Handler Path",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
@@ -55,7 +63,7 @@
    "link_fieldname": "node_type"
   }
  ],
- "modified": "2025-04-25 09:44:56.037558",
+ "modified": "2025-04-26 20:23:10.031453",
  "modified_by": "Administrator",
  "module": "Hazlernode",
  "name": "Hazler Node Type",

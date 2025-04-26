@@ -17,6 +17,8 @@ export interface HazlerNodeType{
 	description?: string
 	/**	Kind : Select	*/
 	kind: "Trigger" | "Action"
+	/**	Handler Path : Data - Dotted path to the handler class	*/
+	handler_path: string
 	/**	Params : Table - Hazler Event Param	*/
 	params?: HazlerEventParam[]
 }
