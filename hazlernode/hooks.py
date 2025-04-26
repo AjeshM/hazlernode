@@ -12,6 +12,7 @@ app_license = "agpl-3.0"
 
 export_python_type_annotations = True
 
+page_renderer = ["hazlernode.hazler_webhook_handler.HazlerWebhookHandler"]
 # Each item in the list will be shown as an app in the apps page
 # add_to_apps_screen = [
 # 	{
