@@ -1,13 +1,11 @@
 import { useEffect, useMemo } from 'react';
 import {
   ReactFlow,
-  MiniMap,
   Controls,
   Background,
-  useNodesState,
-  useEdgesState,
   BackgroundVariant,
   Edge,
+  Node,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import WorkflowNode from '@/components/nodes/node';
@@ -27,17 +25,17 @@ export default function WorkflowEditor({
     }),
     [],
   );
+  const editorStore = useEditorStore();
 
-  /*  const editorStore = useEditorStore((state) => ({
+  /* const editorStore = useEditorStore((state) => ({
     nodes: state.nodes,
     edges: state.edges,
     onNodesChange: state.onNodesChange,
     onEdgesChange: state.onEdgesChange,
     setNodes: state.setNodes,
     setEdges: state.setEdges,
-  }));
- */
-  const editorStore = useEditorStore.getState();
+  })); */
+
   useEffect(() => {
     const processedNodes = getProcessedNodes(hazlerNodes);
     editorStore.setNodes(processedNodes);
@@ -64,7 +62,7 @@ export default function WorkflowEditor({
   );
 }
 function getProcessedNodes(hazlerNodes: Array<HazlerNode>): Array<Node> {
-  const processedNodes: Array<Node<HazlerNode | null>> = [];
+  const processedNodes: Array<Node> = [];
 
   let currentY = 100;
   const stepY = 120;
@@ -72,7 +70,7 @@ function getProcessedNodes(hazlerNodes: Array<HazlerNode>): Array<Node> {
 
   for (const node of hazlerNodes) {
     processedNodes.push({
-      id: node.name,
+      id: String(node.name),
       position: { x: centerX, y: currentY },
       data: { ...node },
       type: 'workflowNode',
@@ -97,9 +95,7 @@ function getProcessedNodes(hazlerNodes: Array<HazlerNode>): Array<Node> {
   return processedNodes;
 }
 
-function getProcessedEdges(
-  processedNodes: Array<Node<HazlerNode>>,
-): Array<Edge> {
+function getProcessedEdges(processedNodes: Array<Node>): Array<Edge> {
   const processedEdges: Array<Edge> = [];
 
   // connect 1 with 2, 2 with 3, 3 with 4, etc.
