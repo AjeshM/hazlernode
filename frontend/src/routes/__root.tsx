@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  ErrorComponent,
   Link,
   Outlet,
   createRootRouteWithContext,
@@ -24,7 +25,7 @@ export const Route = createRootRouteWithContext<{
   loader: ({ context }) =>
     context.queryClient.ensureQueryData(userQueryOptions),
   pendingComponent: () => <p>User Data loading pending...</p>,
-  errorComponent: () => <p>User Data loading failed...</p>,
+  errorComponent: ({ error }) => <ErrorComponent error={error} />,
   component: RootComponent,
 });
 
