@@ -4,6 +4,8 @@
 import frappe
 from frappe.model.document import Document
 
+from hazlernode.nodes import Node
+
 
 class HazlerNode(Document):
     # begin: auto-generated types
@@ -22,6 +24,7 @@ class HazlerNode(Document):
         parentfield: DF.Data
         parenttype: DF.Data
         type: DF.Link
+
     # end: auto-generated types
     def execute(self, params=None, context=None):
         handler_path = frappe.db.get_value(
@@ -30,5 +33,5 @@ class HazlerNode(Document):
         module_path, classname = handler_path.rsplit(".", 1)
         module = frappe.get_module(module_path)
         class_ = getattr(module, classname, None)
-        print("=-" * 20)
-        class_().execute(self.event, params, context)
+        obj: Node = class_()
+        obj.execute(self.event, params, context)
