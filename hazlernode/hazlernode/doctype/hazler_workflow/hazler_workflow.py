@@ -37,6 +37,8 @@ class HazlerWorkflow(Document):
             frappe.throw("There must be only one trigger node in workflow")
 
     def execute(self, context=None):
+        if not self.enabled:
+            return
         execution_log = frappe.new_doc("Hazler Workflow Execution Log")
         execution_log.workflow = self.name
         # execution_log.status = "Running"
