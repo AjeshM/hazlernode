@@ -1,19 +1,25 @@
 # Copyright (c) 2025, Ajesh Jagdish Meshram and contributors
 # For license information, please see license.txt
 
-# import frappe
+import frappe
 from frappe.model.document import Document
 
 
 class HazlerWebhookListener(Document):
-	# begin: auto-generated types
-	# This code is auto-generated. Do not modify anything in this block.
+    # begin: auto-generated types
+    # This code is auto-generated. Do not modify anything in this block.
 
-	from typing import TYPE_CHECKING
+    from typing import TYPE_CHECKING
 
-	if TYPE_CHECKING:
-		from frappe.types import DF
+    if TYPE_CHECKING:
+        from frappe.types import DF
 
-		workflow: DF.Link
-	# end: auto-generated types
-	pass
+        workflow: DF.Link
+    # end: auto-generated types
+
+    def validate(self):
+        self.validate_unique_workflow()
+
+    def validate_unique_workflow(self):
+        if frappe.db.exists("Hazler Webhook Listener", {"workflow": self.workflow}):
+            frappe.throw("Listener for this workflow already exists!")
