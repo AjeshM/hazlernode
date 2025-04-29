@@ -16,7 +16,7 @@ class HazlerNodeType(Document):
         from hazlernode.hazlernode.doctype.hazler_event_param.hazler_event_param import HazlerEventParam
 
         description: DF.SmallText | None
-        handler_path: DF.Data
+        handler_path: DF.Data | None
         kind: DF.Literal["Trigger", "Action"]
         params: DF.Table[HazlerEventParam]
         preview_image: DF.AttachImage | None

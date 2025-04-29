@@ -13,28 +13,30 @@ class HazlerWorkflow(Document):
 
     if TYPE_CHECKING:
         from frappe.types import DF
-        from hazlernode.hazlernode.doctype.hazler_node.hazler_node import (
-            HazlerNode,
-        )
+        from hazlernode.hazlernode.doctype.hazler_node.hazler_node import HazlerNode
 
         enabled: DF.Check
         name: DF.Int | None
         nodes: DF.Table[HazlerNode]
         title: DF.Data
-
+        trigger_config: DF.JSON | None
+        trigger_type: DF.Link | None
     # end: auto-generated types
 
     def validate(self):
-        self.validate_first_node_is_trigger_node()
-        self.validate_only_one_trigger_node()
+        self.validate_nodes()
 
-    def validate_first_node_is_trigger_node(self):
-        if not self.nodes[0].kind == "Trigger":
-            frappe.throw("First node in workflow must be a trigger")
+    def validate_nodes(self):
+        self.validate_trigger_is_reqired()
+        for i, node in enumerate(self.nodes):
+            if not node.kind == "Action":
+                frappe.throw(
+                    f"Node: {frappe.bold(node.type)}, on row #{i+1} must be an action node!"
+                )
 
-    def validate_only_one_trigger_node(self):
-        if list(n.kind for n in self.nodes).count("Trigger") > 1:
-            frappe.throw("There must be only one trigger node in workflow")
+    def validate_trigger_is_reqired(self):
+        if len(self.nodes) > 0 and not self.trigger_type:
+            frappe.throw("Trigger is required for the workflow!")
 
     def execute(self, context=None):
         if not self.enabled:
@@ -43,7 +45,7 @@ class HazlerWorkflow(Document):
         execution_log.workflow = self.name
         # execution_log.status = "Running"
         try:
-            for node in self.nodes[1:]:
+            for node in self.nodes:
                 print("executing: ", node, node.type, node.event)
                 parameters = frappe.parse_json(node.parameters)
                 context = node.execute(parameters, context)

@@ -15,6 +15,10 @@ export interface HazlerWorkflow{
 	enabled?: 0 | 1
 	/**	Title : Data	*/
 	title: string
+	/**	Trigger Type : Link - Hazler Node Type	*/
+	trigger_type?: string
+	/**	Trigger Config : JSON	*/
+	trigger_config?: any
 	/**	Nodes : Table - Hazler Node	*/
 	nodes?: HazlerNode[]
 }

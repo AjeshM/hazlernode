@@ -7,6 +7,10 @@
  "field_order": [
   "enabled",
   "title",
+  "trigger_section",
+  "trigger_type",
+  "column_break_ztrf",
+  "trigger_config",
   "section_break_zvtn",
   "nodes"
  ],
@@ -33,6 +37,28 @@
    "fieldtype": "Table",
    "label": "Nodes",
    "options": "Hazler Node"
+  },
+  {
+   "fieldname": "trigger_section",
+   "fieldtype": "Section Break",
+   "label": "Trigger"
+  },
+  {
+   "fieldname": "trigger_type",
+   "fieldtype": "Link",
+   "label": "Trigger Type",
+   "options": "Hazler Node Type"
+  },
+  {
+   "fieldname": "column_break_ztrf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "{}",
+   "fieldname": "trigger_config",
+   "fieldtype": "JSON",
+   "label": "Trigger Config",
+   "read_only": 1
   }
  ],
  "grid_page_length": 50,
@@ -43,7 +69,7 @@
    "link_fieldname": "workflow"
   }
  ],
- "modified": "2025-04-25 09:45:12.511212",
+ "modified": "2025-04-28 17:33:36.653574",
  "modified_by": "Administrator",
  "module": "Hazlernode",
  "name": "Hazler Workflow",

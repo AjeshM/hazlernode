@@ -48,11 +48,12 @@
    "options": "Hazler Event Param"
   },
   {
+   "depends_on": "eval:doc.kind === \"Action\"",
    "description": "Dotted path to the handler class",
    "fieldname": "handler_path",
    "fieldtype": "Data",
    "label": "Handler Path",
-   "reqd": 1
+   "mandatory_depends_on": "eval:doc.kind === \"Action\""
   }
  ],
  "grid_page_length": 50,
@@ -63,7 +64,7 @@
    "link_fieldname": "node_type"
   }
  ],
- "modified": "2025-04-26 20:23:10.031453",
+ "modified": "2025-04-28 17:06:44.432988",
  "modified_by": "Administrator",
  "module": "Hazlernode",
  "name": "Hazler Node Type",
