@@ -9,7 +9,8 @@
   "title",
   "fieldtype",
   "column_break_eoxp",
-  "fieldname"
+  "fieldname",
+  "options"
  ],
  "fields": [
   {
@@ -24,7 +25,7 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Fieldtype",
-   "options": "Data\nCheck\nNumber\nDate",
+   "options": "Data\nCheck\nNumber\nDate\nSelect\nLink",
    "reqd": 1
   },
   {
@@ -37,13 +38,18 @@
    "in_list_view": 1,
    "label": "Fieldname",
    "reqd": 1
+  },
+  {
+   "fieldname": "options",
+   "fieldtype": "Small Text",
+   "label": "Options"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-04-25 09:42:29.571371",
+ "modified": "2025-05-01 21:11:50.109410",
  "modified_by": "Administrator",
  "module": "Hazlernode",
  "name": "Hazler Event Param",
