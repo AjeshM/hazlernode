@@ -24,7 +24,6 @@ class HazlerNode(Document):
         parentfield: DF.Data
         parenttype: DF.Data
         type: DF.Link
-
     # end: auto-generated types
     def execute(self, params=None, context=None):
         handler_path = frappe.db.get_value(

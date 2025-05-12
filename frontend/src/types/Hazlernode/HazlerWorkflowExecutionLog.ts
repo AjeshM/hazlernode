@@ -1,3 +1,4 @@
+import { HazlerExecutionNodeLog } from './HazlerExecutionNodeLog'
 
 export interface HazlerWorkflowExecutionLog{
 	name: number
@@ -20,4 +21,12 @@ export interface HazlerWorkflowExecutionLog{
 	status?: "Success" | "Failed" | "Running"
 	/**	Traceback : Code	*/
 	traceback?: string
+	/**	Trigger Type : Data	*/
+	trigger_type?: string
+	/**	Trigger Config : Code	*/
+	trigger_config?: string
+	/**	Node Logs : Table - Hazler Execution Node Log	*/
+	node_logs?: HazlerExecutionNodeLog[]
+	/**	Initial Context : Code	*/
+	initial_context?: string
 }

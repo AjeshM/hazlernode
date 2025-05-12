@@ -12,7 +12,14 @@
   "column_break_zhjr",
   "status",
   "section_break_lgfb",
-  "traceback"
+  "traceback",
+  "workflow_snapshot_section",
+  "trigger_type",
+  "column_break_jxks",
+  "trigger_config",
+  "section_break_jkkb",
+  "node_logs",
+  "initial_context"
  ],
  "fields": [
   {
@@ -66,13 +73,51 @@
    "fieldtype": "Code",
    "label": "Traceback",
    "read_only": 1
+  },
+  {
+   "fieldname": "workflow_snapshot_section",
+   "fieldtype": "Section Break",
+   "label": "Workflow Snapshot"
+  },
+  {
+   "fieldname": "trigger_type",
+   "fieldtype": "Data",
+   "label": "Trigger Type",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_jxks",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "trigger_config",
+   "fieldtype": "Code",
+   "label": "Trigger Config",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_jkkb",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "node_logs",
+   "fieldtype": "Table",
+   "label": "Node Logs",
+   "options": "Hazler Execution Node Log"
+  },
+  {
+   "fieldname": "initial_context",
+   "fieldtype": "Code",
+   "label": "Initial Context",
+   "options": "JSON",
+   "read_only": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-05-12 13:54:04.248879",
+ "modified": "2025-05-12 14:12:22.899247",
  "modified_by": "Administrator",
  "module": "Hazlernode",
  "name": "Hazler Workflow Execution Log",
