@@ -54,6 +54,7 @@ class HazlerWorkflow(Document):
 
         except Exception:
             execution_log.status = "Failed"
+            execution_log.traceback = frappe.get_traceback()
 
         finally:
             execution_log.insert(ignore_permissions=True)

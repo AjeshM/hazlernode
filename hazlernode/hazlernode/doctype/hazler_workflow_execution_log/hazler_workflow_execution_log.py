@@ -17,6 +17,7 @@ class HazlerWorkflowExecutionLog(Document):
 		amended_from: DF.Link | None
 		name: DF.Int | None
 		status: DF.Literal["Success", "Failed", "Running"]
+		traceback: DF.Code | None
 		workflow: DF.Link
 		workflow_title: DF.Data | None
 	# end: auto-generated types

@@ -18,4 +18,6 @@ export interface HazlerWorkflowExecutionLog{
 	amended_from?: string
 	/**	Status : Select	*/
 	status?: "Success" | "Failed" | "Running"
+	/**	Traceback : Code	*/
+	traceback?: string
 }
