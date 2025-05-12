@@ -3,12 +3,18 @@ from typing import Optional
 import frappe
 from werkzeug.wrappers import Response
 
+from hazlernode.exceptions import HazlerWorkflowExecutionError
+from hazlernode.hazlernode.doctype.hazler_workflow.hazler_workflow import (
+    HazlerWorkflow,
+)
+
 
 class HazlerWebhookHandler:
     def __init__(self, path: str, status_code: Optional[int] = None):
         self.path = path
         self.webhook_id = None
         self.request_obj = frappe.request
+        self.hazler_webhook_log = None
 
     def can_render(self):
         print(self.path)
@@ -45,7 +51,7 @@ class HazlerWebhookHandler:
 
     def create_hazler_webhook_log(self, serializable_context):
 
-        frappe.get_doc(
+        self.hazler_webhook_log = frappe.get_doc(
             {
                 "doctype": "Hazler Webhook Log",
                 "webhook": self.webhook_id,
@@ -63,4 +69,13 @@ class HazlerWebhookHandler:
         )
         # Execute Workflow
 
-        frappe.get_doc("Hazler Workflow", linked_workflow).execute(context)
+        wf: HazlerWorkflow = frappe.get_doc("Hazler Workflow", linked_workflow)
+
+        try:
+            wf.execute(context, raise_exception=True)
+        except:
+            self.hazler_webhook_log.db_set("response_status", "Failure")
+            frappe.throw(
+                "Workflow execution failure",
+                HazlerWorkflowExecutionError,
+            )

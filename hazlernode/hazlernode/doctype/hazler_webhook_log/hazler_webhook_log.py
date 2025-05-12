@@ -16,6 +16,7 @@ class HazlerWebhookLog(Document):
 
 		context: DF.Code | None
 		name: DF.Int | None
+		response_status: DF.Literal["Success", "Failed"]
 		webhook: DF.Link
 	# end: auto-generated types
 	pass

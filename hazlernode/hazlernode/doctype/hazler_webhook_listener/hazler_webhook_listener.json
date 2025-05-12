@@ -19,8 +19,13 @@
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2025-04-26 21:51:36.133117",
+ "links": [
+  {
+   "link_doctype": "Hazler Webhook Log",
+   "link_fieldname": "webhook"
+  }
+ ],
+ "modified": "2025-05-12 14:39:29.496271",
  "modified_by": "Administrator",
  "module": "Hazlernode",
  "name": "Hazler Webhook Listener",
@@ -39,6 +44,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

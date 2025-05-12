@@ -12,6 +12,8 @@ export interface HazlerWebhookLog{
 	idx?: number
 	/**	Webhook : Link - Hazler Webhook Listener	*/
 	webhook: string
+	/**	Response Status : Select	*/
+	response_status?: "Success" | "Failed"
 	/**	Context : Code	*/
 	context?: string
 }
