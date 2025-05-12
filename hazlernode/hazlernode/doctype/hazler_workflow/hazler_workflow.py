@@ -53,7 +53,6 @@ class HazlerWorkflow(Document):
             for node in self.nodes:
                 print("executing: ", node, node.type, node.event)
                 parameters = frappe.parse_json(node.parameters)
-                context = node.execute(parameters, context)
                 output = node.execute(parameters, context)
                 execution_log.append(
                     "node_logs",
@@ -62,7 +61,7 @@ class HazlerWorkflow(Document):
                         "event": node.event,
                         "context": frappe.as_json(context),
                         "params": node.parameters,
-                        "output": output,
+                        "output": frappe.as_json(output),
                     },
                 )
                 execution_log.save(ignore_permissions=True)
@@ -80,6 +79,7 @@ class HazlerWorkflow(Document):
             execution_log.submit()
             if execution_log.status == "Failed" and raise_exception:
                 raise
+            frappe.db.commit()
 
 
 # Send an email

@@ -74,7 +74,7 @@ class HazlerWebhookHandler:
         try:
             wf.execute(context, raise_exception=True)
         except:
-            self.hazler_webhook_log.db_set("response_status", "Failure")
+            self.hazler_webhook_log.db_set("response_status", "Failed")
             frappe.throw(
                 "Workflow execution failure",
                 HazlerWorkflowExecutionError,

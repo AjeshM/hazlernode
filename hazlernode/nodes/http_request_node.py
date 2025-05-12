@@ -13,5 +13,4 @@ class HTTPRequestNode(Node):
                 frappe.throw("URL is required to make HTTP GET Request")
 
             response = requests.get(url)
-            print("Respone", response.json())
-            return response
+            return response.json()
