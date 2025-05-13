@@ -11,7 +11,7 @@ export interface HazlerScheduledEvent{
 	parenttype?: string
 	idx?: number
 	/**	CRON Expression : Data	*/
-	cron_expression?: string
+	cron_expression: string
 	/**	Scheduled Job Type : Link - Scheduled Job Type	*/
-	scheduled_job_type?: string
+	job_type?: string
 }

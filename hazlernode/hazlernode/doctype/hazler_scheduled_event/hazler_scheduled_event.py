@@ -15,8 +15,8 @@ class HazlerScheduledEvent(Document):
     if TYPE_CHECKING:
         from frappe.types import DF
 
-        cron_expression: DF.Data | None
-        scheduled_job_type: DF.Link | None
+        cron_expression: DF.Data
+        job_type: DF.Link | None
 
     # end: auto-generated types
     def before_save(self):

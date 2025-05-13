@@ -5,9 +5,10 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "cron_expression",
   "column_break_oklp",
-  "scheduled_job_type"
+  "cron_expression",
+  "column_break_ojer",
+  "job_type"
  ],
  "fields": [
   {
@@ -15,14 +16,18 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "CRON Expression",
-   "read_only": 1
+   "reqd": 1
   },
   {
    "fieldname": "column_break_oklp",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "scheduled_job_type",
+   "fieldname": "column_break_ojer",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "job_type",
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Scheduled Job Type",
@@ -33,7 +38,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-05-12 18:12:59.502003",
+ "modified": "2025-05-13 13:37:00.746254",
  "modified_by": "Administrator",
  "module": "Hazlernode",
  "name": "Hazler Scheduled Event",
