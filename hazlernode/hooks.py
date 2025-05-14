@@ -20,6 +20,9 @@ fixtures = [
     {"dt": "Hazler Node Type", "filters": {"is_standard": 1}},
     {"dt": "Hazler Node Event Type", "filters": {"is_standard": 1}},
 ]
+before_migrate = "hazlernode.utils.cleanup_hazler_scheduled_events"
+after_migrate = "hazlernode.utils.sync_hazler_scheduled_events"
+
 # Each item in the list will be shown as an app in the apps page
 # add_to_apps_screen = [
 # 	{
