@@ -108,7 +108,7 @@
  ],
  "in_create": 1,
  "links": [],
- "modified": "2025-05-14 08:59:32.285782",
+ "modified": "2025-05-14 16:02:19.074689",
  "modified_by": "Administrator",
  "module": "Hazlernode",
  "name": "Hazler Workflow Execution Log",
@@ -131,7 +131,16 @@
  "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": [],
+ "states": [
+  {
+   "color": "Light Blue",
+   "title": "Running"
+  },
+  {
+   "color": "Red",
+   "title": "Failed"
+  }
+ ],
  "title_field": "workflow_title",
  "track_seen": 1
 }
