@@ -13,10 +13,14 @@ class HazlerNodeType(Document):
 
     if TYPE_CHECKING:
         from frappe.types import DF
-        from hazlernode.hazlernode.doctype.hazler_event_param.hazler_event_param import HazlerEventParam
+
+        from hazlernode.hazlernode.doctype.hazler_event_param.hazler_event_param import (
+            HazlerEventParam,
+        )
 
         description: DF.SmallText | None
         handler_path: DF.Data | None
+        is_standard: DF.Check
         kind: DF.Literal["Trigger", "Action"]
         params: DF.Table[HazlerEventParam]
         preview_image: DF.AttachImage | None

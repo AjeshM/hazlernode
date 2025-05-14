@@ -11,6 +11,7 @@
   "column_break_nmgp",
   "kind",
   "handler_path",
+  "is_standard",
   "section_break_ckxl",
   "params"
  ],
@@ -54,6 +55,12 @@
    "fieldtype": "Data",
    "label": "Handler Path",
    "mandatory_depends_on": "eval:doc.kind === \"Action\""
+  },
+  {
+   "default": "0",
+   "fieldname": "is_standard",
+   "fieldtype": "Check",
+   "label": "Is Standard?"
   }
  ],
  "grid_page_length": 50,
@@ -64,7 +71,7 @@
    "link_fieldname": "node_type"
   }
  ],
- "modified": "2025-04-28 17:06:44.432988",
+ "modified": "2025-05-14 07:06:57.281900",
  "modified_by": "Administrator",
  "module": "Hazlernode",
  "name": "Hazler Node Type",
@@ -84,6 +91,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []
