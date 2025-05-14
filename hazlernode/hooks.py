@@ -28,8 +28,8 @@ fixtures = [
 
 
 # Hazler Scheduled Event Syncing
-before_migrate = "hazlernode.utils.cleanup_hazler_scheduled_events"
-after_migrate = "hazlernode.utils.sync_hazler_scheduled_events"
+before_migrate = "hazlernode.install.before_migrate"
+after_migrate = "hazlernode.install.after_migrate"
 
 
 # Let SPA handle frontend routing
