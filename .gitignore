@@ -7,3 +7,4 @@ node_modules
 __pycache__
 hazlernode/public/frontend
 hazlernode/www/frontend.html
+hazlernode/www/hazlernode.html

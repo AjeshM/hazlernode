@@ -14,4 +14,7 @@ declare global {
   type HazlerNodeType = DocTypeHazlerNodeType;
   type HazlerNodeEventType = DocTypeHazlerNodeEventType;
   type HazlerEventParam = DocTypeHazlerEventParam;
+  interface Window {
+    csrf_token: string;
+  }
 }
