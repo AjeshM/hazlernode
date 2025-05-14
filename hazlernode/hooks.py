@@ -16,7 +16,10 @@ page_renderer = [
     "hazlernode.nodes.triggers.hazler_webhook_handler.HazlerWebhookHandler"
 ]
 
-fixtures = [{"dt": "Hazler Node Type", "filters": {"is_standard": 1}}]
+fixtures = [
+    {"dt": "Hazler Node Type", "filters": {"is_standard": 1}},
+    {"dt": "Hazler Node Event Type", "filters": {"is_standard": 1}},
+]
 # Each item in the list will be shown as an app in the apps page
 # add_to_apps_screen = [
 # 	{

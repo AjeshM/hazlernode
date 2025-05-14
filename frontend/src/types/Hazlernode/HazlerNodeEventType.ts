@@ -13,6 +13,8 @@ export interface HazlerNodeEventType{
 	idx?: number
 	/**	Title : Data	*/
 	title: string
+	/**	Is Standard? : Check	*/
+	is_standard?: 0 | 1
 	/**	Node Type : Link - Hazler Node Type	*/
 	node_type: string
 	/**	Params : Table - Hazler Event Param	*/

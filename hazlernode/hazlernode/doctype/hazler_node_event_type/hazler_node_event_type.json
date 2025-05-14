@@ -6,6 +6,7 @@
  "engine": "InnoDB",
  "field_order": [
   "title",
+  "is_standard",
   "column_break_xvla",
   "node_type",
   "section_break_nzik",
@@ -39,12 +40,18 @@
    "fieldtype": "Table",
    "label": "Params",
    "options": "Hazler Event Param"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_standard",
+   "fieldtype": "Check",
+   "label": "Is Standard?"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-04-26 20:22:22.937530",
+ "modified": "2025-05-14 07:24:37.836024",
  "modified_by": "Administrator",
  "module": "Hazlernode",
  "name": "Hazler Node Event Type",
@@ -64,6 +71,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "show_title_field_in_link": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
