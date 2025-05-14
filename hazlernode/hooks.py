@@ -10,19 +10,41 @@ app_license = "agpl-3.0"
 
 # required_apps = []
 
+# Generate type annotations
 export_python_type_annotations = True
 
+
+# Webhook Trigger Handler
 page_renderer = [
     "hazlernode.nodes.triggers.hazler_webhook_handler.HazlerWebhookHandler"
 ]
 
+
+# Out of the box nodes
 fixtures = [
     {"dt": "Hazler Node Type", "filters": {"is_standard": 1}},
     {"dt": "Hazler Node Event Type", "filters": {"is_standard": 1}},
 ]
+
+
+# Hazler Scheduled Event Syncing
 before_migrate = "hazlernode.utils.cleanup_hazler_scheduled_events"
 after_migrate = "hazlernode.utils.sync_hazler_scheduled_events"
 
+
+# Let SPA handle frontend routing
+website_route_rules = [
+    {"from_route": "/frontend/<path:app_path>", "to_route": "hazlernode"},
+]
+
+# For Document Event Handler Trigger
+doc_events = {
+    "*": {
+        "after_insert": "hazlernode.nodes.triggers.hazler_document_event_handler.handle",
+        "on_change": "hazlernode.nodes.triggers.hazler_document_event_handler.handle",
+        "after_delete": "hazlernode.nodes.triggers.hazler_document_event_handler.handle",
+    }
+}
 # Each item in the list will be shown as an app in the apps page
 # add_to_apps_screen = [
 # 	{
@@ -150,13 +172,13 @@ after_migrate = "hazlernode.utils.sync_hazler_scheduled_events"
 # ---------------
 # Hook on document methods and events
 
-doc_events = {
-    "*": {
-        "after_insert": "hazlernode.nodes.triggers.hazler_document_event_handler.handle",
-        "on_change": "hazlernode.nodes.triggers.hazler_document_event_handler.handle",
-        "after_delete": "hazlernode.nodes.triggers.hazler_document_event_handler.handle",
-    }
-}
+# doc_events = {
+#     "*": {
+#         "after_insert": "hazlernode.nodes.triggers.hazler_document_event_handler.handle",
+#         "on_change": "hazlernode.nodes.triggers.hazler_document_event_handler.handle",
+#         "after_delete": "hazlernode.nodes.triggers.hazler_document_event_handler.handle",
+#     }
+# }
 
 # Scheduled Tasks
 # ---------------
@@ -254,8 +276,3 @@ doc_events = {
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
-
-
-website_route_rules = [
-    {"from_route": "/frontend/<path:app_path>", "to_route": "hazlernode"},
-]
