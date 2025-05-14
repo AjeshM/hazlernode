@@ -1,32 +1,42 @@
 [
-  {
-    "docstatus": 0,
-    "doctype": "Hazler Node Event Type",
-    "is_standard": 1,
-    "modified": "2025-05-14 07:27:11.568685",
-    "name": 1,
-    "node_type": "API Call",
-    "params": [
-      {
-        "fieldname": "url",
-        "fieldtype": "Data",
-        "options": null,
-        "parent": 1,
-        "parentfield": "params",
-        "parenttype": "Hazler Node Event Type",
-        "title": "URL"
-      }
-    ],
-    "title": "GET"
-  },
-  {
-    "docstatus": 0,
-    "doctype": "Hazler Node Event Type",
-    "is_standard": 1,
-    "modified": "2025-05-14 19:51:13.858417",
-    "name": 2,
-    "node_type": "API Call",
-    "params": [],
-    "title": "POST"
-  }
+ {
+  "docstatus": 0,
+  "doctype": "Hazler Node Event Type",
+  "is_standard": 1,
+  "modified": "2025-05-14 07:46:16.928847",
+  "name": 3,
+  "node_type": "API Call",
+  "params": [
+   {
+    "fieldname": "url",
+    "fieldtype": "Data",
+    "options": null,
+    "parent": 3,
+    "parentfield": "params",
+    "parenttype": "Hazler Node Event Type",
+    "title": "URL"
+   }
+  ],
+  "title": "GET"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Hazler Node Event Type",
+  "is_standard": 1,
+  "modified": "2025-05-14 07:46:17.007288",
+  "name": 4,
+  "node_type": "API Call",
+  "params": [],
+  "title": "POST"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Hazler Node Event Type",
+  "is_standard": 1,
+  "modified": "2025-05-14 08:09:05.523480",
+  "name": 5,
+  "node_type": "Email",
+  "params": [],
+  "title": "Send Email"
+ }
 ]
