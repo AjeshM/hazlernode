@@ -1,146 +1,137 @@
 {
-  "actions": [],
-  "autoname": "autoincrement",
-  "creation": "2025-04-17 19:56:06.800300",
-  "doctype": "DocType",
-  "engine": "MyISAM",
-  "field_order": [
-    "section_break_eyti",
-    "workflow",
-    "workflow_title",
-    "amended_from",
-    "column_break_zhjr",
-    "status",
-    "section_break_lgfb",
-    "traceback",
-    "workflow_snapshot_section",
-    "trigger_type",
-    "column_break_jxks",
-    "trigger_config",
-    "section_break_jkkb",
-    "node_logs",
-    "initial_context"
-  ],
-  "fields": [
-    {
-      "fieldname": "section_break_eyti",
-      "fieldtype": "Section Break"
-    },
-    {
-      "fieldname": "amended_from",
-      "fieldtype": "Link",
-      "label": "Amended From",
-      "no_copy": 1,
-      "options": "Hazler Workflow Execution Log",
-      "print_hide": 1,
-      "read_only": 1,
-      "search_index": 1
-    },
-    {
-      "fieldname": "workflow",
-      "fieldtype": "Link",
-      "in_list_view": 1,
-      "in_standard_filter": 1,
-      "label": "Workflow",
-      "options": "Hazler Workflow",
-      "reqd": 1
-    },
-    {
-      "fieldname": "column_break_zhjr",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "status",
-      "fieldtype": "Select",
-      "in_list_view": 1,
-      "in_standard_filter": 1,
-      "label": "Status",
-      "options": "Success\nFailed\nRunning"
-    },
-    {
-      "fetch_from": "workflow.title",
-      "fieldname": "workflow_title",
-      "fieldtype": "Data",
-      "label": "Workflow Title"
-    },
-    {
-      "fieldname": "section_break_lgfb",
-      "fieldtype": "Section Break"
-    },
-    {
-      "depends_on": "eval:doc.status==\"Failed\"",
-      "fieldname": "traceback",
-      "fieldtype": "Code",
-      "label": "Traceback",
-      "read_only": 1
-    },
-    {
-      "fieldname": "workflow_snapshot_section",
-      "fieldtype": "Section Break",
-      "label": "Workflow Snapshot"
-    },
-    {
-      "fieldname": "trigger_type",
-      "fieldtype": "Data",
-      "label": "Trigger Type",
-      "read_only": 1
-    },
-    {
-      "fieldname": "column_break_jxks",
-      "fieldtype": "Column Break"
-    },
-    {
-      "fieldname": "trigger_config",
-      "fieldtype": "Code",
-      "label": "Trigger Config",
-      "read_only": 1
-    },
-    {
-      "fieldname": "section_break_jkkb",
-      "fieldtype": "Section Break"
-    },
-    {
-      "fieldname": "node_logs",
-      "fieldtype": "Table",
-      "label": "Node Logs",
-      "options": "Hazler Execution Node Log"
-    },
-    {
-      "fieldname": "initial_context",
-      "fieldtype": "Code",
-      "label": "Initial Context",
-      "options": "JSON",
-      "read_only": 1
-    }
-  ],
-  "in_create": 1,
-  "is_submittable": 1,
-  "links": [],
-  "modified": "2025-05-12 14:28:46.492541",
-  "modified_by": "Administrator",
-  "module": "Hazlernode",
-  "name": "Hazler Workflow Execution Log",
-  "naming_rule": "Autoincrement",
-  "owner": "Administrator",
-  "permissions": [
-    {
-      "create": 1,
-      "delete": 1,
-      "email": 1,
-      "export": 1,
-      "print": 1,
-      "read": 1,
-      "report": 1,
-      "role": "System Manager",
-      "share": 1,
-      "submit": 1,
-      "write": 1
-    }
-  ],
-  "row_format": "Dynamic",
-  "sort_field": "modified",
-  "sort_order": "DESC",
-  "states": [],
-  "title_field": "workflow_title",
-  "track_seen": 1
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2025-04-17 19:56:06.800300",
+ "doctype": "DocType",
+ "engine": "MyISAM",
+ "field_order": [
+  "section_break_eyti",
+  "workflow",
+  "workflow_title",
+  "column_break_zhjr",
+  "status",
+  "section_break_lgfb",
+  "traceback",
+  "workflow_snapshot_section",
+  "trigger_type",
+  "column_break_jxks",
+  "trigger_config",
+  "section_break_jkkb",
+  "node_logs",
+  "initial_context"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_eyti",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "workflow",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Workflow",
+   "options": "Hazler Workflow",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_zhjr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Success\nFailed\nRunning",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "workflow.title",
+   "fieldname": "workflow_title",
+   "fieldtype": "Data",
+   "label": "Workflow Title",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_lgfb",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "eval:doc.status==\"Failed\"",
+   "fieldname": "traceback",
+   "fieldtype": "Code",
+   "label": "Traceback",
+   "read_only": 1
+  },
+  {
+   "fieldname": "workflow_snapshot_section",
+   "fieldtype": "Section Break",
+   "label": "Workflow Snapshot"
+  },
+  {
+   "fieldname": "trigger_type",
+   "fieldtype": "Data",
+   "label": "Trigger Type",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_jxks",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "trigger_config",
+   "fieldtype": "Code",
+   "label": "Trigger Config",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_jkkb",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "node_logs",
+   "fieldtype": "Table",
+   "label": "Node Logs",
+   "options": "Hazler Execution Node Log",
+   "read_only": 1
+  },
+  {
+   "fieldname": "initial_context",
+   "fieldtype": "Code",
+   "label": "Initial Context",
+   "options": "JSON",
+   "read_only": 1
+  }
+ ],
+ "in_create": 1,
+ "links": [],
+ "modified": "2025-05-14 08:59:32.285782",
+ "modified_by": "Administrator",
+ "module": "Hazlernode",
+ "name": "Hazler Workflow Execution Log",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "workflow_title",
+ "track_seen": 1
 }

@@ -73,13 +73,11 @@ class HazlerWorkflow(Document):
             frappe.db.rollback(save_point="workflow_execution_start")
             execution_log.db_set("status", "Failed")
             execution_log.db_set("traceback", frappe.get_traceback())
-
-        finally:
-            execution_log.reload()
-            execution_log.submit()
+            # TODO: Later take traceback to node log level
             if execution_log.status == "Failed" and raise_exception:
                 raise
-            frappe.db.commit()
+        # Ajesh used since flow is not committing
+        frappe.db.commit()
 
 
 # Send an email

@@ -15,7 +15,6 @@ class HazlerWorkflowExecutionLog(Document):
         from frappe.types import DF
         from hazlernode.hazlernode.doctype.hazler_execution_node_log.hazler_execution_node_log import HazlerExecutionNodeLog
 
-        amended_from: DF.Link | None
         initial_context: DF.Code | None
         name: DF.Int | None
         node_logs: DF.Table[HazlerExecutionNodeLog]
