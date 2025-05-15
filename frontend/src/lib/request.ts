@@ -4,7 +4,7 @@ interface APIRequestOptions {
   type: APIType;
   path: string;
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
-  params?: object;
+  params?: { [key: string]: any };
 }
 interface FrappeException {
   exception: string;
@@ -19,6 +19,9 @@ export async function makeRequest(options: APIRequestOptions) {
   }
   if (!options.method) {
     options.method = 'GET';
+  }
+  if (options.params?.filters) {
+    options.params.filters = JSON.stringify(options.params.filters);
   }
   let url = `/api/v2/${options.type}/${options.path}`;
   let body;
