@@ -21,7 +21,7 @@ export default function WorkflowEditor({
   const nodeTypes = useMemo(
     () => ({
       workflowNode: WorkflowNode,
-      addNewNode: AddTriggerNode,
+      setTriggerButton: AddTriggerNode,
     }),
     [],
   );
@@ -84,10 +84,10 @@ function getProcessedNodes(hazlerNodes: Array<HazlerNode>): Array<Node> {
   }
   // To allow user to add new nodes
   processedNodes.push({
-    id: 'add-new',
+    id: 'set-trigger',
     position: { x: centerX, y: currentY },
     data: null,
-    type: 'addNewNode',
+    type: 'setTriggerButton',
     draggable: false,
     focusable: true,
   });
