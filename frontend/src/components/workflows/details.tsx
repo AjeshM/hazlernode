@@ -11,11 +11,15 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from '@/components/ui/resizable';
+import SetTriggerDialog from './set-trigger-dialog';
+import { useState } from 'react';
 
 export function WorkflowDetails() {
   const params = WorkflowDetailsRoute.useParams();
   const navigate = useNavigate();
   const confirm = useConfirm();
+  const [updateTriggerDialogOpen, setUpdateTriggerDialogOpen] =
+    useState<boolean>(false);
 
   const { useSuspenseDoc, useDeleteDocMutation } =
     useDocType<HazlerWorkflow>('Hazler Workflow');
@@ -61,6 +65,19 @@ export function WorkflowDetails() {
             <strong>{workflowDoc.data.title}</strong>
             <ul>
               <li>{workflowDoc.data.trigger_type}</li>
+              <li>
+                Trigger: {workflowDoc.data.trigger_type}{' '}
+                <Button
+                  outline
+                  onClick={() => setUpdateTriggerDialogOpen(true)}
+                >
+                  Change
+                </Button>
+                <SetTriggerDialog
+                  open={updateTriggerDialogOpen}
+                  onClose={setUpdateTriggerDialogOpen}
+                />
+              </li>
             </ul>
             <p>Sidebar</p>
             <Button color="rose" onClick={handleDeleteWorkflow}>
