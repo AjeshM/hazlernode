@@ -1,26 +1,26 @@
-import { HazlerEventParam } from './HazlerEventParam'
+import { HazlerEventParam } from './HazlerEventParam';
 
-export interface HazlerNodeType{
-	name: string
-	creation: string
-	modified: string
-	owner: string
-	modified_by: string
-	docstatus: 0 | 1 | 2
-	parent?: string
-	parentfield?: string
-	parenttype?: string
-	idx?: number
-	/**	Preview Image : Attach Image	*/
-	preview_image?: string
-	/**	Description : Small Text	*/
-	description?: string
-	/**	Kind : Select	*/
-	kind: "Trigger" | "Action"
-	/**	Handler Path : Data - Dotted path to the handler class	*/
-	handler_path?: string
-	/**	Is Standard? : Check	*/
-	is_standard?: 0 | 1
-	/**	Params : Table - Hazler Event Param	*/
-	params?: HazlerEventParam[]
+export interface HazlerNodeType {
+  name: string;
+  creation: string;
+  modified: string;
+  owner: string;
+  modified_by: string;
+  docstatus: 0 | 1 | 2;
+  parent?: string;
+  parentfield?: string;
+  parenttype?: string;
+  idx?: number;
+  /**	Preview Image : Attach Image	*/
+  preview_image?: string;
+  /**	Description : Small Text	*/
+  description?: string;
+  /**	Kind : Select	*/
+  kind: 'Trigger' | 'Action';
+  /**	Handler Path : Data - Dotted path to the handler class	*/
+  handler_path?: string;
+  /**	Is Standard? : Check	*/
+  is_standard?: 0 | 1;
+  /**	Params : Table - Hazler Event Param	*/
+  params?: HazlerEventParam[];
 }
