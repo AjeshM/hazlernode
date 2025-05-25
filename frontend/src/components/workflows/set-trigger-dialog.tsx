@@ -11,6 +11,7 @@ import { type DialogProps as HeadlessDialogProps } from '@headlessui/react';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { DocTypeQueryParams, useDocType } from '@/queries/frappe';
+import { useLoaderData } from '@tanstack/react-router';
 
 export default function SetTriggerDialog({
   open,
@@ -33,11 +34,15 @@ export default function SetTriggerDialog({
   const { useSetValueMutation } = useDocType<HazlerWorkflow>('Hazler Workflow');
 
   const setValue = useSetValueMutation();
+  // @ts-ignore
+  const { name: workflowName } = useLoaderData({
+    from: '/workflow/$id',
+  });
 
   function setTrigger(trigger: HazlerNodeType) {
     setValue.mutate(
       {
-        name: '16',
+        name: workflowName.toString(),
         values: {
           trigger_type: trigger.name,
         },
