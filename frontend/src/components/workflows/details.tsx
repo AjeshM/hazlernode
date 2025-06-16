@@ -52,13 +52,12 @@ export function WorkflowDetails() {
     );
   }
 
-  const hazlerNodes = workflowDoc.data.nodes || [];
   return (
     <>
       <div className="grid h-full w-full">
         <ResizablePanelGroup direction="horizontal">
           <ResizablePanel defaultSize={80}>
-            <WorkflowEditor hazlerNodes={hazlerNodes} />
+            <WorkflowEditor hazlerWorkflow={workflowDoc.data} />
           </ResizablePanel>
           <ResizableHandle withHandle />
           <ResizablePanel defaultSize={20}>

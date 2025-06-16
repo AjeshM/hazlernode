@@ -13,9 +13,9 @@ import { AddTriggerNode } from '@/components/nodes/add-trigger-node';
 import { useEditorStore } from '@/stores/workflow-editor';
 
 export default function WorkflowEditor({
-  hazlerNodes,
+  hazlerWorkflow,
 }: {
-  hazlerNodes: Array<HazlerNode>;
+  hazlerWorkflow: HazlerWorkflow;
 }) {
   // Registering custom node types
   const nodeTypes = useMemo(
@@ -37,10 +37,10 @@ export default function WorkflowEditor({
   })); */
 
   useEffect(() => {
-    const processedNodes = getProcessedNodes(hazlerNodes);
+    const processedNodes = getProcessedNodes(hazlerWorkflow);
     editorStore.setNodes(processedNodes);
     editorStore.setEdges(getProcessedEdges(processedNodes));
-  }, [hazlerNodes]);
+  }, [hazlerWorkflow.nodes]);
 
   return (
     <ReactFlow
@@ -61,14 +61,14 @@ export default function WorkflowEditor({
     </ReactFlow>
   );
 }
-function getProcessedNodes(hazlerNodes: Array<HazlerNode>): Array<Node> {
+function getProcessedNodes(hazlerWorkflow: HazlerWorkflow): Array<Node> {
   const processedNodes: Array<Node> = [];
 
   let currentY = 100;
   const stepY = 120;
   const centerX = 300;
 
-  for (const node of hazlerNodes) {
+  for (const node of hazlerWorkflow.nodes || []) {
     processedNodes.push({
       id: String(node.name),
       position: { x: centerX, y: currentY },
@@ -82,15 +82,17 @@ function getProcessedNodes(hazlerNodes: Array<HazlerNode>): Array<Node> {
     // layout vertically
     currentY += stepY;
   }
-  // To allow user to add new nodes
-  processedNodes.push({
-    id: 'set-trigger',
-    position: { x: centerX, y: currentY },
-    data: null,
-    type: 'setTriggerButton',
-    draggable: false,
-    focusable: true,
-  });
+  // To allow user to set a trigger if not already done
+  if (!hazlerWorkflow.trigger_type) {
+    processedNodes.push({
+      id: 'set-trigger',
+      position: { x: centerX, y: currentY },
+      data: null,
+      type: 'setTriggerButton',
+      draggable: false,
+      focusable: true,
+    });
+  }
 
   return processedNodes;
 }
